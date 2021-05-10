@@ -1,6 +1,7 @@
 package com.personal.hotel.auth;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,8 +19,7 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = repository.findByUsername(username);
-        List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>();
-        user.getAuthorities().forEach(authority -> grantedAuthorities.add(new SimpleGrantedAuthority(authority)));
+        List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>(Arrays.asList(new SimpleGrantedAuthority(user.getAuthority())));
 		return new UserPrincipal(user, grantedAuthorities);
 	}
 

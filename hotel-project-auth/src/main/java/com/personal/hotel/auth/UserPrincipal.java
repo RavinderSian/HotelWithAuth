@@ -19,7 +19,7 @@ public class UserPrincipal implements UserDetails { //it was more convenient to 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		
-		return authorities;
+		return this.authorities;
 	}
 
 	@Override

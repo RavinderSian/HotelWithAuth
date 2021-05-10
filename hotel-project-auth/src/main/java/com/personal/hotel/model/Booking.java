@@ -1,4 +1,4 @@
-package com.personal.hotel.auth;
+package com.personal.hotel.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,20 +9,16 @@ import javax.persistence.Id;
 import lombok.Data;
 
 @Data
-@Entity(name = "users")
-public class User {
+@Entity(name = "bookings")
+public class Booking {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "user_name")
-	private String username;
+	@Column(name = "cost")
+	private Double cost;
 	
-	@Column(name = "password")
-	private String password;
 	
-	@Column(name = "authority")
-	private String authority;
-
+	
 }
