@@ -3,11 +3,13 @@ package com.personal.hotel.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
@@ -26,7 +28,10 @@ public class Room {
 	@Column(name = "capacity")
 	private Integer capacity;
 	
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST)
 	private Set<Guest> guests = new HashSet<>();
+	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	private Booking booking;
 	
 }
