@@ -30,7 +30,7 @@ public class BookingServicesImpl implements BookingServices {
 
 	@Override
 	public void delete(Booking booking) {
-		// TODO Auto-generated method stub
+		repository.delete(booking);
 		
 	}
 
