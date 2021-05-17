@@ -22,13 +22,13 @@ import com.personal.hotel.repository.BookingRepository;
 @SpringBootTest
 public class BookingServicesImplTest {
 
-	BookingServices services;
+	private BookingServices services;
 	
 	@Mock
-	BookingRepository repository;
+	private BookingRepository repository;
 	
 	@Mock
-	Booking booking;
+	private Booking booking;
 	
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -75,7 +75,7 @@ public class BookingServicesImplTest {
 	}
 	
 	@Test
-	public void test_FindById_ReturnsEmpty_WhenGivenId10() {
+	public void test_FindById_ReturnsEmptyOptional_WhenGivenId10() {
 		Optional<Booking> bookingOptional = services.findById(10L);
 		assertThat(bookingOptional, equalTo(Optional.empty()));
 	}

@@ -75,7 +75,7 @@ public class RoomServicesImplTest {
 	}
 	
 	@Test
-	public void test_FindById_ReturnsEmpty_WhenGivenId10() {
+	public void test_FindById_ReturnsEmptyOptional_WhenGivenId10() {
 		Optional<Room> roomOptional = services.findById(10L);
 		assertThat(roomOptional, equalTo(Optional.empty()));
 	}

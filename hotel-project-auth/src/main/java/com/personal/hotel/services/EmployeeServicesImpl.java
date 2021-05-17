@@ -18,9 +18,7 @@ public class EmployeeServicesImpl implements EmployeeServices {
 
 	@Override
 	public Optional<Employee> findById(Long id) {
-		return repository.findById(id).isPresent()
-		? repository.findById(id)
-		: Optional.empty();
+		return repository.findById(id).isPresent() ? repository.findById(id) : Optional.empty();
 	}
 
 	@Override
