@@ -18,9 +18,7 @@ public class RoomServicesImpl implements RoomServices {
 
 	@Override
 	public Optional<Room> findById(Long id) {
-		return repository.findById(id).isPresent()
-		? repository.findById(id)
-		: Optional.empty();
+		return repository.findById(id).isPresent() ? repository.findById(id) : Optional.empty();
 	}
 
 	@Override

@@ -18,9 +18,7 @@ public class BookingServicesImpl implements BookingServices {
 
 	@Override
 	public Optional<Booking> findById(Long id) {
-		return repository.findById(id).isPresent()
-		? repository.findById(id)
-		: Optional.empty();
+		return repository.findById(id).isPresent() ? repository.findById(id) : Optional.empty();
 	}
 
 	@Override
