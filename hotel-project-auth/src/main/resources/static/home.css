@@ -1,0 +1,50 @@
+@charset "ISO-8859-1";
+
+ol,ul {
+	list-style: none;
+}
+
+h1 {
+	color: rgb(65, 115, 190);
+	text-align: center;
+}
+
+body {
+  background-color: lightblue;
+}
+
+.headerbox {
+	width: 100%;
+	display: block;
+	border: 5px solid red;
+}
+
+.intro {
+  background-color: yellow;
+}
+
+.header-text {
+	display: inline-block;
+}
+
+.security-text {
+	float: right;
+	padding-right: 5px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.grid-item {
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.responsive-image {
+  max-width:100%;
+  display:block;
+  height:auto;
+}

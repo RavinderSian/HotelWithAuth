@@ -26,10 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/").permitAll()
 		.antMatchers("/admin").hasAuthority("ROLE_ADMIN")
 		.antMatchers("/non-admin").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
-		.anyRequest().authenticated()
 		.and()
 		.httpBasic();
-		
 	}
 	
 	@Bean
