@@ -11,8 +11,7 @@
 
 <div class="headerbox">
 	<div class = "header-text">
-		<h1>Home</h1>
-	</div>
+ 	</div>
 	<div class = "header-text">
 		<h1>Rooms</h1>
 	</div>
@@ -20,7 +19,7 @@
 		<h1>About</h1>
 	</div>
 	<div class = "security-text header-text">
-		<h1><a href= "/guests/newguest">Register</a></h1>
+		<h1>Register</h1>
 	</div>
 	<div class = "security-text">
 		<h1>Login</h1>
@@ -29,13 +28,26 @@
 
 <div class="grid-container">
   <div class="grid-item">
-  	<img class="responsive-image" src="https://media0.giphy.com/media/3o85xLCFHDghSNviO4/giphy.gif">
   </div>
   <div class="grid-item">
-  	<img class="responsive-image" src="https://webneel.com/image/logo/17-hotel-logo-idea.gif">
+  	
+  	<form action="/user/add" th:object="${user}" method="POST">
+    	<div>
+  			<label>Username</label>
+  			<input th:field="*{username}"/> 
+  			<p th:each="error: ${#fields.errors('username')}"th:text="${error}"> User name error</p>
+  		</div>
+  		<div>
+  			<label>Password</label>
+  			<input th:field="*{password}"/>
+  			<p th:each="error: ${#fields.errors('password')}" th:text="${error}">Last name error</p>
+  		</div>
+  		<button type="submit">Submit</button>
+  	</form>
+  	
+  	
   </div>
   <div class="grid-item">
-  	<img class = "responsive-image" src="https://cdn.dribbble.com/users/2859475/screenshots/7551660/media/a6aa2061e5693b544d883e842c479728.gif">
   </div>
 </div>
 

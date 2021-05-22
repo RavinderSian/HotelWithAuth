@@ -29,8 +29,7 @@ public class Guest {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@NotEmpty(message = "please enter a card number")
-	@CreditCardNumber(message = "please enter a valid credit card number")
+	@CreditCardNumber(message = "please enter a valid card number")
 	@Column(name = "bank_card")
 	private String cardNumber;
 	

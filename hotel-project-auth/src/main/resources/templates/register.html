@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="/css/home.css">
+<title>Home</title>
+</head>
+<body>
+
+<h1>The Authenticated Hotel</h1>
+
+<div class="headerbox">
+	<div class = "header-text">
+		<h1><a href= "/">Home</a></h1>
+	</div>
+	<div class = "header-text">
+		<h1>Rooms</h1>
+	</div>
+	<div class = "header-text">
+		<h1>About</h1>
+	</div>
+	<div class = "security-text header-text">
+		<h1>Register</h1>
+	</div>
+	<div class = "security-text">
+		<h1>Login</h1>
+	</div>
+</div>
+
+<div class="grid-container">
+  <div class="grid-item">
+  </div>
+  <div class="grid-item">
+    	<form action="/guests/newguest" th:object="${guest}" method="POST">
+    	<div>
+  			<label>First name</label>
+  			<input th:field="*{firstName}"/> 
+  			<p th:each="error: ${#fields.errors('firstName')}"th:text="${error}"> First name error</p>
+  		</div>
+  		<div>
+  			<label>Last name</label>
+  			<input th:field="*{lastName}"/>
+  			<p th:each="error: ${#fields.errors('lastName')}" th:text="${error}">Last name error</p>
+  		</div>
+  		<div>
+  			<label>Card number</label>
+  			<input th:field="*{cardNumber}"/>
+  			<p th:each="error: ${#fields.errors('cardNumber')}"th:text="${error}">Card number error</p>
+  		</div>
+  		<button type="submit">Submit</button>
+  	</form>
+  	
+  </div>
+  <div class="grid-item">
+  </div>
+</div>
+
+</body>
+</html>
