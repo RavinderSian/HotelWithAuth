@@ -3,7 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/css/home.css">
-<title>Register user</title>
+<title>Login</title>
 </head>
 <body>
 
@@ -12,7 +12,7 @@
 <div class="headerbox">
 	<div class = "header-text">
 		<h1><a href= "/">Home</a></h1>
- 	</div>
+	</div>
 	<div class = "header-text">
 		<h1>Rooms</h1>
 	</div>
@@ -31,7 +31,7 @@
   <div class="grid-item">
   </div>
   <div class="grid-item">
-  	<form action="/user/add" th:object="${user}" method="POST">
+  	<form action="/performlogin" th:object="${user}" method="POST">
     	<div>
   			<label>Username</label>
   			<input th:field="*{username}"/> 

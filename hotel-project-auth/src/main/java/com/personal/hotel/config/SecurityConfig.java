@@ -25,6 +25,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception { //this method allows you to set the domain specific language which can configure the servlet filters
 		http
 		.csrf().disable()
+		.formLogin()
+		.loginProcessingUrl("/performlogin") //url to submit the username and pw to
+		.defaultSuccessUrl("/") //landing page after login
+		.failureUrl("/failedlogin") //for when login fails
+		.and()
+		.logout()
+		.logoutUrl("/logout") //url for default logout page
+		.deleteCookies("JSESSIONID") 
+		.and()
 		.httpBasic();
 		
 		http.headers().frameOptions().disable(); //stops h2 database having an error
