@@ -7,7 +7,7 @@ public class SimpleGrantedAuthority implements GrantedAuthority {
 	private final String authority;
 	
 	public SimpleGrantedAuthority(String role) {
-		this.authority = role;
+		this.authority = "ROLE_" + role;
 	}
 
 	@Override
