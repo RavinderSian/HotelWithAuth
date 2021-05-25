@@ -22,7 +22,7 @@ public class Room {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "room_number")
+	@Column(name = "room_number", unique = true)
 	private Integer roomNumber;
 	
 	@Column(name = "capacity")
@@ -30,6 +30,9 @@ public class Room {
 	
 	@Column(name = "occupied")
 	private boolean occupied;
+	
+	@Column(name = "price")
+	private Double price;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private Set<Guest> guests = new HashSet<>();
