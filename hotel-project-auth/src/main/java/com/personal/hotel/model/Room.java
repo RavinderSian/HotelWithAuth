@@ -28,6 +28,9 @@ public class Room {
 	@Column(name = "capacity")
 	private Integer capacity;
 	
+	@Column(name = "occupied")
+	private boolean occupied;
+	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private Set<Guest> guests = new HashSet<>();
 	

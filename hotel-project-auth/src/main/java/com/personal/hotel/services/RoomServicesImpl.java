@@ -1,5 +1,6 @@
 package com.personal.hotel.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -29,7 +30,11 @@ public class RoomServicesImpl implements RoomServices {
 	@Override
 	public void delete(Room room) {
 		repository.delete(room);
-		
+	}
+
+	@Override
+	public List<Room> getEmptyRooms() {
+		return repository.findByOccupied(false);
 	}
 
 }

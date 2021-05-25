@@ -9,6 +9,8 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -80,4 +82,25 @@ public class RoomServicesImplTest {
 		assertThat(roomOptional, equalTo(Optional.empty()));
 	}
 
+	@Test
+	public void test_GetEmptyRooms_CallsRepositoryFindByOccupied() {
+		services.getEmptyRooms();
+		verify(repository, times(1)).findByOccupied(false);
+	}
+	
+	@Test
+	public void test_GetEmptyRooms_ReturnsListOfSize1_When1EmptyRoomPresent() {
+		room.setOccupied(false);
+		when(repository.findByOccupied(false)).thenReturn(Arrays.asList(room));
+		List<Room> emptyRooms = services.getEmptyRooms();
+		assertThat(emptyRooms.size(), equalTo(1));
+	}
+	
+	@Test
+	public void test_GetEmptyRooms_ReturnsEmptyList_WhenNoEmptyRoomPresent() {
+		room.setOccupied(true);
+		List<Room> emptyRooms = services.getEmptyRooms();
+		assertThat(emptyRooms.size(), equalTo(0));
+	}
+	
 }
