@@ -47,6 +47,16 @@
   			<input th:field="*{cardNumber}"/>
   			<p th:each="error: ${#fields.errors('cardNumber')}"th:text="${error}">Card number error</p>
   		</div>
+  		 <div>
+  			<label>Username</label>
+  			<input th:field="*{user.username}"/>
+  			<p th:each="error: ${#fields.errors('user.username')}"th:text="${error}">Username error</p>
+  		</div>
+  		 <div>
+  			<label>Password</label>
+  			<input th:field="*{user.password}"/>
+  			<p th:each="error: ${#fields.errors('user.password')}"th:text="${error}">Password error</p>
+  		</div>
   		<button type="submit">Submit</button>
   	</form>
   </div>

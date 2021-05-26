@@ -2,6 +2,7 @@ package com.personal.hotel.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,7 +23,7 @@ public class GuestController {
 	public GuestController(GuestServices guestServices) {
 		this.guestServices = guestServices;
 	}
-	
+
 	@GetMapping("newguest")
 	public String register(Model model) {
 		model.addAttribute("guest", new Guest());
@@ -36,7 +37,12 @@ public class GuestController {
 			return "register";
 		}
 		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		guest.getUser().setPassword(encoder.encode(guest.getUser().getPassword()));
+		guest.getUser().setAuthority("USER");
 		guestServices.save(guest);
-		return "redirect:/user/add";
+		
+		return "redirect:/";
 	}
 }

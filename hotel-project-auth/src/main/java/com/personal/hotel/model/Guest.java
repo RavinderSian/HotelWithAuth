@@ -7,9 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.CreditCardNumber;
+
+import com.personal.hotel.auth.User;
 
 import lombok.Data;
 
@@ -35,4 +38,8 @@ public class Guest {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Room room;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private User user;
+	
 }
