@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="/css/home.css">
+<title>Your Bookings</title>
+</head>
+<body>
+
+<h1>The Authenticated Hotel</h1>
+
+<div class="headerbox">
+	<div class = "header-text">
+		<h1><a href= "/">Home</a></h1>
+	</div>
+	<div class = "header-text">
+		<h1>Rooms</h1>
+	</div>
+	<div class = "header-text">
+		<h1>About</h1>
+	</div>
+	<div class = "security-text header-text">
+		<h1><a href= "/guests/newguest">Register</a></h1>
+	</div>
+	<div class = "security-text">
+		<h1><a href= "/login">Login</a></h1>
+	</div>
+</div>
+
+<div class="grid-container">
+
+	<div class="grid-item">
+		<h1>User:</h1><h1  th:text="${username}"></h1>
+	</div>
+
+  <div class="grid-item">
+  	<table>
+  		<tr>
+  			<th>Booking Id</th>
+  			<th class ="table-padding">Cost</th>
+  			<th class ="table-padding">Room Number</th>
+  			<th></th>
+  		</tr>
+  		<tr th:each="booking : ${booking}">
+  			<td th:text="${booking.id}"></td>
+  			<td th:text="${booking.cost}"></td>
+  			<td th:text="${room.roomNumber}"></td>
+  		</tr>
+  	</table>
+  </div>
+</div>
+
+</body>
+</html>

@@ -22,16 +22,32 @@ public class Room {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "room_number")
+	@Column(name = "room_number", unique = true)
 	private Integer roomNumber;
 	
 	@Column(name = "capacity")
 	private Integer capacity;
+	
+	@Column(name = "occupied")
+	private boolean occupied;
+	
+	@Column(name = "price")
+	private Double price;
 	
 	@OneToMany(cascade = CascadeType.PERSIST)
 	private Set<Guest> guests = new HashSet<>();
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Booking booking;
+	
+	public void addGuest(Guest guest) {
+		this.guests.add(guest);
+		guest.setRoom(this);
+	}
+	
+	public void removeGuest(Guest guest) {
+		this.guests.remove(guest);
+		guest.setRoom(null);
+	}
 	
 }

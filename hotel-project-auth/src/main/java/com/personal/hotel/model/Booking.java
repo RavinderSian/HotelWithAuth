@@ -30,4 +30,15 @@ public class Booking {
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Employee employee;
+	
+	public void addRoom(Room room) {
+		this.rooms.add(room);
+		room.setBooking(this);
+	}
+	
+	public void removeRoom(Room room) {
+		this.rooms.remove(room);
+		room.setBooking(null);
+	}
+	
 }
