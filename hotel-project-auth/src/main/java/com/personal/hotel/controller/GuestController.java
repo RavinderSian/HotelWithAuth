@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.personal.hotel.auth.User;
+import com.personal.hotel.auth.UserRepository;
 import com.personal.hotel.model.Guest;
 import com.personal.hotel.services.GuestServices;
 
@@ -19,9 +21,11 @@ import com.personal.hotel.services.GuestServices;
 public class GuestController {
 	
 	private final GuestServices guestServices;
+	private final UserRepository userRepository;
 	
-	public GuestController(GuestServices guestServices) {
+	public GuestController(GuestServices guestServices, UserRepository userRepository) {
 		this.guestServices = guestServices;
+		this.userRepository = userRepository;
 	}
 
 	@GetMapping("newguest")
@@ -39,10 +43,18 @@ public class GuestController {
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		guest.getUser().setPassword(encoder.encode(guest.getUser().getPassword()));
-		guest.getUser().setAuthority("USER");
+		User user = new User();
+		user.setAuthority("USER");
+		String password = encoder.encode(guest.getUser().getPassword());
+		user.setPassword(password);
+		user.setUsername(guest.getUser().getUsername());
+		
+		guest.setUser(user);
 		guestServices.save(guest);
 		
+		user.setGuest(guest);
+		userRepository.save(user);
+
 		return "redirect:/";
 	}
 }
