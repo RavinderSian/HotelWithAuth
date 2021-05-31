@@ -39,12 +39,16 @@
   			<th>Booking Id</th>
   			<th class ="table-padding">Cost</th>
   			<th class ="table-padding">Room Number</th>
+  			<th class ="table-padding">Created Date</th>
+  			<th class ="table-padding">Last Updated</th>
   			<th></th>
   		</tr>
   		<tr th:each="booking : ${booking}">
   			<td th:text="${booking.id}"></td>
   			<td th:text="${booking.cost}"></td>
   			<td th:text="${room.roomNumber}"></td>
+  			<td th:text="${booking.bookingDate}"></td>
+  			<td th:text="${booking.lastUpdated}"></td>
   		</tr>
   	</table>
   </div>

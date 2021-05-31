@@ -1,5 +1,6 @@
 package com.personal.hotel.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -40,5 +44,11 @@ public class Booking {
 		this.rooms.remove(room);
 		room.setBooking(null);
 	}
+	
+	@CreationTimestamp
+	LocalDate bookingDate;
+	
+	@UpdateTimestamp
+	LocalDate lastUpdated;
 	
 }
