@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+@ToString
 @NoArgsConstructor
 @Entity(name = "guests")
 public class Guest {
@@ -54,8 +55,7 @@ public class Guest {
 	
 	@Getter
 	@Setter
-	@ToString.Exclude
 	@OneToOne(cascade = CascadeType.ALL)
-	private User user;
+	private User user = new User();
 	
 }

@@ -38,6 +38,8 @@ public class GuestController {
 	public String addGuest(@Valid @ModelAttribute Guest guest, BindingResult bindingResult, Model model){
 		
 		if (bindingResult.hasErrors()) {
+			System.out.println("----------------------- has errors");
+
 			return "register";
 		}
 		
@@ -45,10 +47,13 @@ public class GuestController {
 		
 		User user = new User();
 		user.setAuthority("USER");
+		System.out.println("-----------------------" + guest.toString());
+		System.out.println("-----------------------" + guest.getUser().getPassword() );
+		user.setUsername(guest.getUser().getUsername());
+		System.out.println("-----------------------" + guest.toString());
+		System.out.println("-----------------------" + guest.getUser().getPassword() );
 		String password = encoder.encode(guest.getUser().getPassword());
 		user.setPassword(password);
-		user.setUsername(guest.getUser().getUsername());
-		
 		guest.setUser(user);
 		guestServices.save(guest);
 		

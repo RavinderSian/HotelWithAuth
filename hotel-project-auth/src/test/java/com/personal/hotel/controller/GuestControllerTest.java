@@ -1,12 +1,10 @@
 package com.personal.hotel.controller;
 
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasProperty;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
@@ -20,9 +18,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
 import com.personal.hotel.model.Guest;
 import com.personal.hotel.services.GuestServices;
@@ -59,11 +61,41 @@ public class GuestControllerTest {
 				.andExpect(view().name("register"));
 	}
 	
-	@WithMockUser(username = "rsian", password = "$2y$12$dOHmu8Hj5GlPzXs7PEivOugwiiqhehtDBeHNh5FLHfZb0FikRjgIm", roles = "USER")
 	@Test
 	public void test_AddGuest_ReturnsCorrectView_WhenCalled() throws Exception {
-		mockMvc.perform(post("/newguest"))
+		
+		Guest guest = new Guest();
+		
+		guest.setFirstName("rav");
+		guest.setLastName("sian");
+		guest.setCardNumber("5334070956810518");
+		
+		User user = new User();
+		user.setUsername("rs");
+		user.setPassword("rs");
+		
+		ObjectMapper mapper = new ObjectMapper();
+	    mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+	    ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
+	    String requestJson = ow.writeValueAsString(guest);
+		mockMvc.perform(post("/guests/newguest").contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE).content(requestJson)
+				.param("firstName", "rsn")
+				.param("lastName", "rss")
+				.param("cardNumber", "5334070956810518")
+				.param("username", "rsv")
+				.param("password", "rs"))
 				.andExpect(status().isOk());
+		
+		
+//		verify(services, times(1)).save(guest);
+//			verify(userRepository, times(1)).save(user);
 	}
 
+	@Test
+	public void test_AddGuest_ReturnsCorectView_WhenGivenNoInput() throws Exception {
+		mockMvc.perform(post("/guests/newguest"))
+				.andExpect(view().name("register"))
+				.andExpect(status().isOk());
+	}
+	
 }

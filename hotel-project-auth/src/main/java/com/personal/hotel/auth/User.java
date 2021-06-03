@@ -12,7 +12,9 @@ import com.personal.hotel.model.Guest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @NoArgsConstructor
 @Entity(name = "user")
 public class User {
