@@ -36,13 +36,20 @@ public class BookingController {
 		
 		User user = userRepository.findByUsername(request.getUserPrincipal().getName());
 		
+		System.out.println(request.getUserPrincipal().getName() + "----------------------");
+		
+		System.out.println(user.toString());
+		
 		Room room = roomServices.findById(roomId).get();
+
 		
 		room.addGuest(user.getGuest());
 		room.setOccupied(true);
 		Booking booking = new Booking();
 		booking.addRoom(room);
 		
+		roomServices.save(room);
+		System.out.println(room.toString());
 		services.save(booking);
 		
 		return "redirect:/booking/yourbooking";

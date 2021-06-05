@@ -48,14 +48,16 @@ public class Guest {
 	@Column(name = "bank_card")
 	private String cardNumber;
 	
+	@ToString.Exclude
 	@Getter
 	@Setter
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Room room;
 	
+	@ToString.Exclude
 	@Getter
 	@Setter
 	@OneToOne(cascade = CascadeType.ALL)
-	private User user = new User();
+	private User user;
 	
 }

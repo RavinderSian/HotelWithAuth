@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity(name = "rooms")
@@ -38,6 +39,7 @@ public class Room {
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) //eager fetch type stops error in controller test failed to lazily initialize a collection of role
 	private Set<Guest> guests = new HashSet<>();
 	
+	@ToString.Exclude
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Booking booking;
 	
