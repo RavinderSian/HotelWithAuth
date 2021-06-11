@@ -37,7 +37,6 @@ public class GuestUserBootstrap implements CommandLineRunner {
 		guest.setUser(user);
 		userRepository.save(user);
 		guestRepository.save(guest);
-		
 	}
 
 }
