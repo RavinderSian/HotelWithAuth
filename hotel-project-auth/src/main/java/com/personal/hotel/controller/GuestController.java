@@ -1,11 +1,13 @@
 package com.personal.hotel.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,9 +37,11 @@ public class GuestController {
 	}
 
 	@PostMapping("newguest")
-	public String addGuest(@Valid @ModelAttribute Guest guest, BindingResult bindingResult, Model model){
+	public String addGuest(@Valid @ModelAttribute Guest guest, BindingResult bindingResult, Model model, 
+			HttpServletResponse httpServletResponse){
 		
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors() || guest.getUser().getUsername().isEmpty() || guest.getUser().getPassword().isEmpty()) {
+			httpServletResponse.setStatus(400);
 			return "register";
 		}
 		
@@ -47,6 +51,7 @@ public class GuestController {
 		user.setAuthority("USER");
 		user.setUsername(guest.getUser().getUsername());
 		user.setPassword(encoder.encode(guest.getUser().getPassword()));
+		
 		guest.setUser(user);
 		guestServices.save(guest);
 		

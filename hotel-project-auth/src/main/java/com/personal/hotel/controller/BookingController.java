@@ -35,13 +35,7 @@ public class BookingController {
 	public String bookRoom(Model model, HttpServletRequest request, @PathVariable Long roomId) {
 		
 		User user = userRepository.findByUsername(request.getUserPrincipal().getName());
-		
-		System.out.println(request.getUserPrincipal().getName() + "----------------------");
-		
-		System.out.println(user.toString());
-		
 		Room room = roomServices.findById(roomId).get();
-
 		
 		room.addGuest(user.getGuest());
 		room.setOccupied(true);
@@ -49,17 +43,15 @@ public class BookingController {
 		booking.addRoom(room);
 		
 		roomServices.save(room);
-		System.out.println(room.toString());
 		services.save(booking);
 		
 		return "redirect:/booking/yourbooking";
 	}
 	
-	@RequestMapping("yourbooking")
-	public String yourBookings(Model model, HttpServletRequest request) {
+	@GetMapping("yourbooking")
+	public String yourBooking(Model model, HttpServletRequest request) {
 		
 		User user = userRepository.findByUsername(request.getUserPrincipal().getName());
-
 		model.addAttribute("username", request.getUserPrincipal().getName());
 		model.addAttribute("booking", user.getGuest().getRoom().getBooking());
 		model.addAttribute("room", user.getGuest().getRoom());

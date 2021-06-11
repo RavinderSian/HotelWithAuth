@@ -5,22 +5,24 @@ import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
+import com.personal.hotel.model.Guest;
 import com.personal.hotel.services.GuestServices;
 
-@SpringBootTest
-@AutoConfigureMockMvc
+@WebMvcTest(GuestController.class)
 public class GuestControllerTest {
 
 	@Autowired
@@ -51,41 +53,68 @@ public class GuestControllerTest {
 				.andExpect(view().name("register"));
 	}
 	
-//	@Test
-//	public void test_AddGuest_ReturnsCorrectView_WhenCalled() throws Exception {
-//		
-//		Guest guest = new Guest();
-//		
-//		guest.setFirstName("rav");
-//		guest.setLastName("sian");
-//		guest.setCardNumber("5334070956810518");
-//		
-//		User user = new User();
-//		user.setUsername("rs");
-//		user.setPassword("rs");
-//		
-//		ObjectMapper mapper = new ObjectMapper();
-//	    mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-//	    ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-//	    String requestJson = ow.writeValueAsString(guest);
-//		mockMvc.perform(post("/guests/newguest").contentType(MediaType.APPLICATION_JSON_VALUE).content(requestJson)
-//				.param("firstName", "rsn")
-//				.param("lastName", "rss")
-//				.param("cardNumber", "5334070956810518")
-//				.param("username", "rsv")
-//				.param("password", "rs"))
-//				.andExpect(status().isOk());
-//		
-//		
-//		verify(services, times(1)).save(guest);
-//			verify(userRepository, times(1)).save(user);
-//	}
-
+	
+	@Test
+	public void test_addGuestGet_ReturnsCorrectStatusAndView_WhenCalled() throws Exception {
+		
+		mockMvc.perform(get("/guests/newguest"))
+				.andExpect(view().name("register"))
+				.andExpect(status().isOk());
+	}
+	
+	@Test
+	public void test_AddGuest_ReturnsCorrectViewAndStatus_WhenGivenValidInput() throws Exception {
+		
+		Guest guest = new Guest();
+		
+		guest.setFirstName("rav");
+		guest.setLastName("sian");
+		guest.setCardNumber("5334070956810518");
+		
+		User user = new User();
+		user.setUsername("rs");
+		user.setPassword("rs");
+		
+		mockMvc.perform(post("/guests/newguest")
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("firstName", "rsn")
+				.param("lastName", "rss")
+				.param("cardNumber", "5334070956810518")
+				.param("user.username", "rsv")
+				.param("user.password", "rs"))
+				.andExpect(redirectedUrl("/"))
+				.andExpect(status().isFound());
+	}
+	
+	@Test
+	public void test_AddGuest_ReturnsCorrectViewAndStatus_WhenGivenInvalidInput() throws Exception {
+		
+		Guest guest = new Guest();
+		
+		guest.setFirstName("rav");
+		guest.setLastName("sian");
+		guest.setCardNumber("5334070956810518");
+		
+		User user = new User();
+		user.setUsername("rs");
+		user.setPassword("rs");
+		
+		mockMvc.perform(post("/guests/newguest")
+				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.param("firstName", "rsn")
+				.param("lastName", "rss")
+				.param("cardNumber", "55")
+				.param("user.username", "rsv")
+				.param("user.password", "rs"))
+				.andExpect(view().name("register"))
+				.andExpect(status().isBadRequest());
+	}
+	
 	@Test
 	public void test_AddGuest_ReturnsCorectView_WhenGivenNoInput() throws Exception {
 		mockMvc.perform(post("/guests/newguest"))
 				.andExpect(view().name("register"))
-				.andExpect(status().isOk());
+				.andExpect(status().isBadRequest());
 	}
 	
 }
