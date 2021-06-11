@@ -47,16 +47,7 @@ public class GuestControllerTest {
 	}
 	
 	@Test
-	public void test_Register_ReturnsCorrectView_WhenCalled() throws Exception {
-		mockMvc.perform(get("/guests/newguest"))
-				.andExpect(status().isOk())
-				.andExpect(view().name("register"));
-	}
-	
-	
-	@Test
 	public void test_addGuestGet_ReturnsCorrectStatusAndView_WhenCalled() throws Exception {
-		
 		mockMvc.perform(get("/guests/newguest"))
 				.andExpect(view().name("register"))
 				.andExpect(status().isOk());
@@ -87,7 +78,7 @@ public class GuestControllerTest {
 	}
 	
 	@Test
-	public void test_AddGuest_ReturnsCorrectViewAndStatus_WhenGivenInvalidInput() throws Exception {
+	public void test_AddGuest_ReturnsCorrectViewAndStatus_WhenGivenInvalidGuestInput() throws Exception {
 		
 		Guest guest = new Guest();
 		
@@ -111,7 +102,7 @@ public class GuestControllerTest {
 	}
 	
 	@Test
-	public void test_AddGuest_ReturnsCorectView_WhenGivenNoInput() throws Exception {
+	public void test_AddGuest_ReturnsCorectViewAndStatus_WhenGivenNoInput() throws Exception {
 		mockMvc.perform(post("/guests/newguest"))
 				.andExpect(view().name("register"))
 				.andExpect(status().isBadRequest());
