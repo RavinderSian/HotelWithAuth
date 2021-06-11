@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
 @Entity(name = "rooms")
@@ -34,9 +36,10 @@ public class Room {
 	@Column(name = "price")
 	private Double price;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) //eager fetch type stops error in controller test failed to lazily initialize a collection of role
 	private Set<Guest> guests = new HashSet<>();
 	
+	@ToString.Exclude
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Booking booking;
 	

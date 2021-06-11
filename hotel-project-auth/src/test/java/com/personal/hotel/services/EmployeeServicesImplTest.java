@@ -1,7 +1,6 @@
 package com.personal.hotel.services;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -22,13 +21,13 @@ import com.personal.hotel.repository.EmployeeRepository;
 @SpringBootTest
 public class EmployeeServicesImplTest {
 
-	EmployeeServices services;
+	private EmployeeServices services;
 	
 	@Mock
-	EmployeeRepository repository;
+	private EmployeeRepository repository;
 	
 	@Mock
-	Employee employee;
+	private Employee employee;
 	
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -39,7 +38,7 @@ public class EmployeeServicesImplTest {
 
 	@Test
 	public void test_Service_IsNotNull() {
-		assertThat(services, is(not(nullValue())));
+		assertThat(services, (not(nullValue())));
 	}
 	
 	@Test

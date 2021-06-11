@@ -1,5 +1,6 @@
 package com.personal.hotel.controller;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -35,9 +36,11 @@ public class GuestController {
 	}
 
 	@PostMapping("newguest")
-	public String addGuest(@Valid @ModelAttribute Guest guest, BindingResult bindingResult, Model model){
+	public String addGuest(@Valid @ModelAttribute Guest guest, BindingResult bindingResult, Model model, 
+			HttpServletResponse httpServletResponse){
 		
-		if (bindingResult.hasErrors()) {
+		if (bindingResult.hasErrors() || guest.getUser().getUsername().isEmpty() || guest.getUser().getPassword().isEmpty()) {
+			httpServletResponse.setStatus(400);
 			return "register";
 		}
 		
@@ -45,9 +48,8 @@ public class GuestController {
 		
 		User user = new User();
 		user.setAuthority("USER");
-		String password = encoder.encode(guest.getUser().getPassword());
-		user.setPassword(password);
 		user.setUsername(guest.getUser().getUsername());
+		user.setPassword(encoder.encode(guest.getUser().getPassword()));
 		
 		guest.setUser(user);
 		guestServices.save(guest);
