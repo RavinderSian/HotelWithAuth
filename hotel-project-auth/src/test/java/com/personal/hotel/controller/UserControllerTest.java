@@ -1,8 +1,8 @@
 package com.personal.hotel.controller;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -19,26 +19,21 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
-import com.personal.hotel.model.Guest;
-import com.personal.hotel.services.GuestServices;
 
-@WebMvcTest(GuestController.class)
-public class GuestControllerTest {
+@WebMvcTest(UserController.class)
+public class UserControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
 
-	private GuestController controller;
-	
-	@MockBean
-	private GuestServices services;
+	private UserController controller;
 	
 	@MockBean
 	private UserRepository userRepository;
 	
 	@BeforeEach
 	public void setUp() throws Exception {
-		this.controller = new GuestController(services, userRepository);
+		this.controller = new UserController(userRepository);
 	}
 
 	@Test
@@ -48,64 +43,46 @@ public class GuestControllerTest {
 	
 	@Test
 	public void test_addGuestGet_ReturnsCorrectStatusAndView_WhenCalled() throws Exception {
-		mockMvc.perform(get("/guests/newguest"))
+		mockMvc.perform(get("/user/newuser"))
 				.andExpect(view().name("register"))
 				.andExpect(status().isOk());
 	}
 	
 	@Test
-	public void test_AddGuest_ReturnsCorrectViewAndStatus_WhenGivenValidInput() throws Exception {
-		
-		Guest guest = new Guest();
-		
-		guest.setFirstName("rav");
-		guest.setLastName("sian");
-		guest.setCardNumber("5334070956810518");
+	public void test_RegisterUser_ReturnsCorrectViewAndStatus_WhenGivenValidInput() throws Exception {
 		
 		User user = new User();
 		user.setUsername("rs");
 		user.setPassword("rs");
 		
-		mockMvc.perform(post("/guests/newguest")
+		mockMvc.perform(post("/user/newuser")
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-				.param("firstName", "rsn")
-				.param("lastName", "rss")
-				.param("cardNumber", "5334070956810518")
-				.param("user.username", "rsv")
-				.param("user.password", "rs"))
+				.param("username", "rsv")
+				.param("password", "rs"))
 				.andExpect(redirectedUrl("/"))
 				.andExpect(status().isFound());
 	}
 	
 	@Test
-	public void test_AddGuest_ReturnsCorrectViewAndStatus_WhenGivenInvalidGuestInput() throws Exception {
-		
-		Guest guest = new Guest();
-		
-		guest.setFirstName("rav");
-		guest.setLastName("sian");
-		guest.setCardNumber("5334070956810518");
+	public void test_RegisterUser_ReturnsCorrectViewAndStatus_WhenGivenInvalidGuestInput() throws Exception {
 		
 		User user = new User();
 		user.setUsername("rs");
 		user.setPassword("rs");
 		
-		mockMvc.perform(post("/guests/newguest")
+		mockMvc.perform(post("/user/newuser")
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
-				.param("firstName", "rsn")
-				.param("lastName", "rss")
-				.param("cardNumber", "55")
-				.param("user.username", "rsv")
-				.param("user.password", "rs"))
+				.param("username", "rsv"))
 				.andExpect(view().name("register"))
 				.andExpect(status().isBadRequest());
 	}
 	
 	@Test
-	public void test_AddGuest_ReturnsCorectViewAndStatus_WhenGivenNoInput() throws Exception {
-		mockMvc.perform(post("/guests/newguest"))
+	public void test_RegisterUser_ReturnsCorectViewAndStatus_WhenGivenNoInput() throws Exception {
+		mockMvc.perform(post("/user/newuser"))
 				.andExpect(view().name("register"))
 				.andExpect(status().isBadRequest());
 	}
 	
+
 }

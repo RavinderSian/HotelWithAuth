@@ -1,5 +1,6 @@
 package com.personal.hotel.auth;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotEmpty;
 
-import com.personal.hotel.model.Guest;
+import com.personal.hotel.model.Booking;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,11 +43,10 @@ public class User {
 	@Setter
 	@Column(name = "authority")
 	private String authority;
-
-	@ToString.Exclude
+	
 	@Getter
 	@Setter
-	@OneToOne
-	private Guest guest;
-	
+	@OneToOne(cascade = CascadeType.ALL)
+	private Booking booking;
+
 }

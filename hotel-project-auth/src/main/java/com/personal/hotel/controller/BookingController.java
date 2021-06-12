@@ -37,7 +37,6 @@ public class BookingController {
 		User user = userRepository.findByUsername(request.getUserPrincipal().getName());
 		Room room = roomServices.findById(roomId).get();
 		
-		room.addGuest(user.getGuest());
 		room.setOccupied(true);
 		Booking booking = new Booking();
 		booking.addRoom(room);
@@ -53,8 +52,8 @@ public class BookingController {
 		
 		User user = userRepository.findByUsername(request.getUserPrincipal().getName());
 		model.addAttribute("username", request.getUserPrincipal().getName());
-		model.addAttribute("booking", user.getGuest().getRoom().getBooking());
-		model.addAttribute("room", user.getGuest().getRoom());
+//		model.addAttribute("booking", user.getGuest().getRoom().getBooking());
+//		model.addAttribute("room", user.getGuest().getRoom());
 		return "yourbooking";
 	}
 	

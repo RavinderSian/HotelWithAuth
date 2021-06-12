@@ -12,9 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
+import com.personal.hotel.auth.User;
 
 import lombok.Data;
 
@@ -44,6 +47,9 @@ public class Booking {
 		this.rooms.remove(room);
 		room.setBooking(null);
 	}
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	private User user;
 	
 	@CreationTimestamp
 	LocalDate bookingDate;

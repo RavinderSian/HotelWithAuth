@@ -14,49 +14,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
-import com.personal.hotel.model.Guest;
-import com.personal.hotel.services.GuestServices;
 
 @Controller
-@RequestMapping("guests/")
-public class GuestController {
+@RequestMapping("user/")
+public class UserController {
 	
-	private final GuestServices guestServices;
 	private final UserRepository userRepository;
-	
-	public GuestController(GuestServices guestServices, UserRepository userRepository) {
-		this.guestServices = guestServices;
+
+	public UserController(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
-	@GetMapping("newguest")
-	public String register(Model model) {
-		model.addAttribute("guest", new Guest());
+	@GetMapping("newuser")
+	public String registerUser(Model model) {
+		model.addAttribute("user", new User());
 		return "register";
 	}
 
-	@PostMapping("newguest")
-	public String addGuest(@Valid @ModelAttribute Guest guest, BindingResult bindingResult, Model model, 
+	@PostMapping("newuser")
+	public String registerUser(@Valid @ModelAttribute User user, BindingResult bindingResult, Model model, 
 			HttpServletResponse httpServletResponse){
 		
-		if (bindingResult.hasErrors() || guest.getUser().getUsername().isEmpty() || guest.getUser().getPassword().isEmpty()) {
+		if (bindingResult.hasErrors()) {
 			httpServletResponse.setStatus(400);
 			return "register";
 		}
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
-		User user = new User();
 		user.setAuthority("USER");
-		user.setUsername(guest.getUser().getUsername());
-		user.setPassword(encoder.encode(guest.getUser().getPassword()));
+		user.setPassword(encoder.encode(user.getPassword()));
 		
-		guest.setUser(user);
-		guestServices.save(guest);
-		
-		user.setGuest(guest);
 		userRepository.save(user);
 
 		return "redirect:/";
 	}
+
 }
