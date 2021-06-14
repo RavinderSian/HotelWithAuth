@@ -31,31 +31,36 @@
   <div class="grid-item">
   </div>
   <div class="grid-item">
-    	<form action="/guests/newguest" th:object="${guest}" method="POST">
-    	<div>
-  			<label>First name</label>
-  			<input th:field="*{firstName}"/> 
-  			<p th:each="error: ${#fields.errors('firstName')}"th:text="${error}"> First name error</p>
-  		</div>
-  		<div>
-  			<label>Last name</label>
-  			<input th:field="*{lastName}"/>
-  			<p th:each="error: ${#fields.errors('lastName')}" th:text="${error}">Last name error</p>
-  		</div>
-  		<div>
-  			<label>Card number</label>
-  			<input th:field="*{cardNumber}"/>
-  			<p th:each="error: ${#fields.errors('cardNumber')}"th:text="${error}">Card number error</p>
+    	<form action="/user/newuser" th:object="${user}" method="POST">
+  		 <div>
+  			<label>First Name</label>
+  			<input th:field="*{firstName}"/>
+  			<p th:each="error: ${#fields.errors('firstName')}"th:text="${error}">First name error</p>
   		</div>
   		 <div>
+  			<label>Last Name</label>
+  			<input th:field="*{lastName}"/>
+  			<p th:each="error: ${#fields.errors('lastName')}"th:text="${error}">Last name error</p>
+  		</div>
+  		  		 <div>
+  			<label>Email</label>
+  			<input th:field="*{email}"/>
+  			<p th:each="error: ${#fields.errors('email')}"th:text="${error}">Email error</p>
+  		</div>
+  		 <div>
+  			<label>Card Number</label>
+  			<input th:field="*{cardNumber}"/>
+  			<p th:each="error: ${#fields.errors('cardNumber')}"th:text="${error}">Card error</p>
+  		</div>
+  		  		 <div>
   			<label>Username</label>
-  			<input th:field="*{user.username}"/>
-  			<p th:each="error: ${#fields.errors('user.username')}"th:text="${error}">Username error</p>
+  			<input th:field="*{username}"/>
+  			<p th:each="error: ${#fields.errors('username')}"th:text="${error}">Username error</p>
   		</div>
   		 <div>
   			<label>Password</label>
-  			<input th:field="*{user.password}"/>
-  			<p th:each="error: ${#fields.errors('user.password')}"th:text="${error}">Password error</p>
+  			<input th:field="*{password}"/>
+  			<p th:each="error: ${#fields.errors('password')}"th:text="${error}">Password error</p>
   		</div>
   		<button type="submit">Submit</button>
   	</form>

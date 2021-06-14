@@ -16,7 +16,6 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -26,7 +25,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
 import com.personal.hotel.model.Booking;
-import com.personal.hotel.model.Guest;
 import com.personal.hotel.model.Room;
 import com.personal.hotel.services.BookingServices;
 import com.personal.hotel.services.RoomServices;
@@ -48,13 +46,9 @@ public class BookingControllerTest {
 	@MockBean
 	private UserRepository userRepository;
 	
-	@Mock
-	private Guest guest;
-	
 	@BeforeEach
 	public void setUp() throws Exception {
 		this.controller = new BookingController(services, roomServices, userRepository);
-		
 	}
 	
 	@Test
@@ -71,25 +65,18 @@ public class BookingControllerTest {
 		user.setPassword("rs");
 		user.setAuthority("USER");
 		
-		Guest guest = new Guest();
-		guest.setFirstName("rav");
-		guest.setLastName("sian");
-		guest.setCardNumber("5334070956810518");
-		user.setGuest(guest);
-		
 		Room room = new Room();
 		room.setCapacity(2);
 		room.setOccupied(false);
 		when(roomServices.findById(1L)).thenReturn(Optional.of(room));
 		when(userRepository.findByUsername("rsian")).thenReturn(user);
 		
-		room.addGuest(guest);
-		
 		mockMvc.perform(get("/booking/1/book"))
 		.andExpect(redirectedUrl("/booking/yourbooking"))
 		.andExpect(status().isFound());
 		
 		verify(userRepository, times(1)).findByUsername("rsian");
+		verify(userRepository, times(1)).save(user);
 		verify(roomServices, times(1)).findById(1L);
 		verify(roomServices, times(1)).save(room);
 		
@@ -104,28 +91,23 @@ public class BookingControllerTest {
 		user.setPassword("rs");
 		user.setAuthority("USER");
 		
-		Guest guest = new Guest();
-		guest.setFirstName("rav");
-		guest.setLastName("sian");
-		guest.setCardNumber("5334070956810518");
-		user.setGuest(guest);
 		
 		Room room = new Room();
 		room.setCapacity(2);
 		room.setOccupied(false);
-		user.getGuest().setRoom(room);
 		
 		Booking booking = new Booking();
-		booking.addRoom(room);
-		user.getGuest().getRoom().setBooking(booking);
+		booking.setRoom(room);
+
+		user.setBooking(booking);
 		
 		when(userRepository.findByUsername("rsian")).thenReturn(user);
 		
 		mockMvc.perform(get("/booking/yourbooking"))
 		.andExpect(view().name("yourbooking"))
 		.andExpect(model().attribute("username", "rsian"))
-		.andExpect(model().attribute("booking", user.getGuest().getRoom().getBooking()))
-		.andExpect(model().attribute("room", user.getGuest().getRoom()))
+		.andExpect(model().attribute("booking", user.getBooking()))
+		.andExpect(model().attribute("room", user.getBooking().getRoom()))
 		.andExpect(status().isOk());
 		
 		verify(userRepository, times(1)).findByUsername("rsian");

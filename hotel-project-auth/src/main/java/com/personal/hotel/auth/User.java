@@ -1,14 +1,18 @@
 package com.personal.hotel.auth;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
-import com.personal.hotel.model.Guest;
+import org.hibernate.validator.constraints.CreditCardNumber;
+
+import com.personal.hotel.model.Booking;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,11 +46,35 @@ public class User {
 	@Setter
 	@Column(name = "authority")
 	private String authority;
-
-	@ToString.Exclude
+	
 	@Getter
 	@Setter
-	@OneToOne
-	private Guest guest;
+	@NotEmpty(message = "please enter a first name")
+	@Column(name = "first_name")
+	private String firstName;
 	
+	@Getter
+	@Setter
+	@NotEmpty(message = "please enter a last name")
+	@Column(name = "last_name")
+	private String lastName;
+	
+	@Getter
+	@Setter
+	@CreditCardNumber(message = "please enter a valid card number")
+	@Column(name = "bank_card")
+	private String cardNumber;
+	
+	@Getter
+	@Setter
+	@NotEmpty(message = "please enter an email")
+	@Email(message = "please enter a valid email")
+	@Column(name = "email")
+	private String email;
+	
+	@Getter
+	@Setter
+	@OneToOne(cascade = CascadeType.PERSIST)
+	private Booking booking;
+
 }
