@@ -40,7 +40,7 @@ public class BookingController {
 		room.setOccupied(true);
 		Booking booking = new Booking();
 		booking.setRoom(room);
-		
+		booking.setUser(user);
 		services.save(booking);
 		
 		user.setBooking(booking);

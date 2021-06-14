@@ -74,7 +74,7 @@ public class User {
 	
 	@Getter
 	@Setter
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private Booking booking;
 
 }

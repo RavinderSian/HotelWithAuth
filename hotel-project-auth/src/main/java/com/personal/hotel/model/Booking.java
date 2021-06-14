@@ -35,7 +35,7 @@ public class Booking {
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Employee employee;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.PERSIST)
 	private User user;
 	
 	@CreationTimestamp
