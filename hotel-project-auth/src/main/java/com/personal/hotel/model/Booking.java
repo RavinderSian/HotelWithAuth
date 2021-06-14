@@ -1,8 +1,6 @@
 package com.personal.hotel.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -32,21 +29,11 @@ public class Booking {
 	@Column(name = "cost")
 	private Double cost;
 	
-	@OneToMany(cascade = CascadeType.PERSIST)
-	List<Room> rooms = new ArrayList<>();
+	@OneToOne(cascade = CascadeType.ALL)
+	private Room room;
 	
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Employee employee;
-	
-	public void addRoom(Room room) {
-		this.rooms.add(room);
-		room.setBooking(this);
-	}
-	
-	public void removeRoom(Room room) {
-		this.rooms.remove(room);
-		room.setBooking(null);
-	}
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private User user;

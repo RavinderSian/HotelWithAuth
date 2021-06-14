@@ -58,7 +58,11 @@ public class UserControllerTest {
 		mockMvc.perform(post("/user/newuser")
 				.contentType(MediaType.APPLICATION_FORM_URLENCODED)
 				.param("username", "rsv")
-				.param("password", "rs"))
+				.param("password", "rs")
+				.param("cardNumber", "5467933247891697")
+				.param("email", "testing@hotmail.co.uk")
+				.param("firstName", "rsv")
+				.param("lastName", "rs"))
 				.andExpect(redirectedUrl("/"))
 				.andExpect(status().isFound());
 	}

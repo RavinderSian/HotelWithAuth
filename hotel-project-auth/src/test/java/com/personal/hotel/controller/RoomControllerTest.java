@@ -1,12 +1,8 @@
 package com.personal.hotel.controller;
 
-import static org.hamcrest.CoreMatchers.allOf;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItem;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -18,6 +14,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -69,32 +66,15 @@ public class RoomControllerTest {
 		secondRoom.setPrice(40.00);
 		secondRoom.setCapacity(3);
 		
+		List<Room> rooms = Arrays.asList(room, secondRoom);
+		
 		when(services.getEmptyRooms()).thenReturn(Arrays.asList(room, secondRoom));
 		
 		mockMvc.perform(get("/rooms"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("rooms"))
 		.andExpect(model().attribute("rooms", hasSize(2)))
-		.andExpect(model().attribute("rooms", hasItem(
-				allOf(
-						hasProperty("id", equalTo(1L)),
-						hasProperty("occupied", equalTo(false)),
-						hasProperty("roomNumber", equalTo(50)),
-						hasProperty("price", equalTo(40.00)),
-						hasProperty("capacity", equalTo(3))
-					)
-				
-				)))
-		.andExpect(model().attribute("rooms", hasItem(
-				allOf(
-						hasProperty("id", equalTo(2L)),
-						hasProperty("occupied", equalTo(false)),
-						hasProperty("roomNumber", equalTo(45)),
-						hasProperty("price", equalTo(40.00)),
-						hasProperty("capacity", equalTo(3))
-					)
-				
-				)));
+		.andExpect(model().attribute("rooms", rooms));
 		
 		verify(services, times(1)).getEmptyRooms();
 	}
