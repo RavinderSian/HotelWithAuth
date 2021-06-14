@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,9 +30,6 @@ public class Booking {
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Room room;
-	
-	@ManyToOne(cascade = CascadeType.PERSIST)
-	private Employee employee;
 	
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private User user;
