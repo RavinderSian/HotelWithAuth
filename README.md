@@ -14,4 +14,7 @@ The home page is responsive as shown below:
 
 ### Registering a User
 
+There is a registration page which can be accessed from the hyperlink shown in the home page:
+
+!(https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Register%20Page.JPG)
 
