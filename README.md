@@ -18,3 +18,5 @@ There is a registration page which can be accessed from the hyperlink shown in t
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Register%20Page.JPG)
 
+This registration page has field validation: 
+![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Register%20Validation.JPG)
