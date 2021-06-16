@@ -27,3 +27,6 @@ This registration page has field validation:
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Register%20Validation.JPG)
 
+The registration is successful as the user is now in the database:
+
+![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/H2%20User.JPG)
