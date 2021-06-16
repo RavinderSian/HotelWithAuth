@@ -9,7 +9,7 @@ The project can be run by right clicking run as > spring boot app or java applic
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/How%20to%20Run.JPG)
 
-### Home page
+## Home page
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/home_page_full.JPG)
 
@@ -17,13 +17,18 @@ The home page is responsive as shown below:
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/home_page_minimized.JPG)
 
-#### Registering a User
+## Registering a User
 
 There is a registration page which can be accessed from the hyperlink shown in the home page:
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Register%20Page.JPG)
 
-This registration page has field validation: 
+The registration is successful as the user is now in the database:
+
+![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/H2%20User.JPG)
+
+The password has been hashed using the BCrypt hashing algorithm
+
+This registration page also has field validation: 
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Register%20Validation.JPG)
-
