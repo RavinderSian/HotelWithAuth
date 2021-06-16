@@ -41,6 +41,7 @@ public class BookingController {
 		Booking booking = new Booking();
 		booking.setRoom(room);
 		booking.setUser(user);
+		booking.setCost(room.getPrice());
 		services.save(booking);
 		
 		user.setBooking(booking);
