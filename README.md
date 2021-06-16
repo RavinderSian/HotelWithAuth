@@ -9,7 +9,7 @@ The project can be run by right clicking run as > spring boot app or java applic
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/How%20to%20Run.JPG)
 
-### Home page
+## Home page
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/home_page_full.JPG)
 
@@ -17,7 +17,7 @@ The home page is responsive as shown below:
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/home_page_minimized.JPG)
 
-#### Registering a User
+## Registering a User
 
 There is a registration page which can be accessed from the hyperlink shown in the home page:
 
