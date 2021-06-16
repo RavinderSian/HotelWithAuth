@@ -1,7 +1,9 @@
 # HotelWithAuth
 Hotel project with spring security basic authentication
 
-This project allows a logged in user to book a room, from a list of displayed rooms.
+This project allows a logged in user to book a room, from a list of displayed rooms. 
+
+This project uses Spring, Spring Security, H2. The back end is written in Java and the front end is in HTML/CSS.
 
 ## How to run
 
@@ -32,3 +34,22 @@ The password has been hashed using the BCrypt hashing algorithm
 This registration page also has field validation: 
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Register%20Validation.JPG)
+
+## Login 
+
+The default spring security login page is used. This is configured in SecurityConfig.java, along with the logout functionality:
+
+![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/DefaultLoginLogoutConfig.JPG)
+
+A successful login redirects to the home page (the login hyperlink will still be present even when logged in)
+
+The login page has field validation and displays "Bad credentials" for incorrect User information:
+
+![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/No%20Fields%20Login.JPG)
+
+![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/No%20Input%20Login%20Password.JPG)
+
+![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Bad%20Credentials.JPG)
+
+
+
