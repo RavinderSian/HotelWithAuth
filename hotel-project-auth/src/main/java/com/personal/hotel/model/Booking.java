@@ -35,9 +35,10 @@ public class Booking {
 	private User user;
 	
 	@CreationTimestamp
-	LocalDate bookingDate;
+	LocalDate bookingCreationDate;
 	
 	@UpdateTimestamp
 	LocalDate lastUpdated;
 	
+	LocalDate dateOfBooking;
 }

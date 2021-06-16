@@ -30,7 +30,14 @@ public class BookingController {
 		this.roomServices = roomServices;
 		this.userRepository = userRepository;
 	}
-
+	
+	
+	@GetMapping("/{roomId}/bookingdate")
+	public String dateForm(Model model, HttpServletRequest request, @PathVariable Long roomId) {
+		
+		
+	}
+	
 	@GetMapping("/{roomId}/book") //get request as values are visible in url
 	public String bookRoom(Model model, HttpServletRequest request, @PathVariable Long roomId) {
 		
