@@ -3,7 +3,7 @@ Hotel project with spring security basic authentication
 
 This project allows a logged in user to book a room, from a list of displayed rooms. 
 
-This project uses Spring, Spring Security, H2. The back end is written in Java and the front end is in HTML/CSS.
+This project uses Spring, Spring Security, H2 and Lombok. The back end is written in Java and the front end is in HTML/CSS.
 
 ## How to run
 
