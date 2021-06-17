@@ -65,8 +65,4 @@ If you are already logged in you will be redirected to a page showing the bookin
 Once a room has been booked, its occupied field is set to true and it is no longer on the rooms list: 
 
 
-
-
-
-
-
+![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/ShorterRoomList.JPG)
