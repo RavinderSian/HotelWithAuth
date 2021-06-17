@@ -60,6 +60,8 @@ A list of unoccupied rooms can be viewed from the rooms hyperlink at the home pa
 If you have not logged in you will be redirected to a login page. 
 If you are already logged in you will be redirected to a page showing the booking and username:
 
+
+
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/BookedRoom.JPG)
 
 Once a room has been booked, its occupied field is set to true and it is no longer on the rooms list: 
