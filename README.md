@@ -23,48 +23,48 @@ The home page is responsive as shown below:
 
 There is a registration page which can be accessed from the hyperlink shown in the home page:
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Register%20Page.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/Register%20Page.JPG)
 
 The registration is successful as the user is now in the database:
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/H2%20User.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/H2%20User.JPG)
 
 The password has been hashed using the BCrypt hashing algorithm
 
 This registration page also has field validation: 
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Register%20Validation.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/Register%20Validation.JPG)
 
 ## Login 
 
 The default spring security login page is used. This is configured in SecurityConfig.java, along with the logout functionality:
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/DefaultLoginLogoutConfig.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/DefaultLoginLogoutConfig.JPG)
 
 A successful login redirects to the home page (the login hyperlink will still be present even when logged in)
 
 The login page has field validation and displays "Bad credentials" for incorrect User information:
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/No%20Fields%20Login.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/No%20Fields%20Login.JPG)
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/No%20Input%20Login%20Password.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/No%20Input%20Login%20Password.JPG)
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Bad%20Credentials.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/Bad%20Credentials.JPG)
 
 ## Booking a room
 
 A list of unoccupied rooms can be viewed from the rooms hyperlink at the home page:
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/Rooms.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/Rooms.JPG)
 
 If you have not logged in you will be redirected to a login page. 
 If you are already logged in you will be redirected to a page showing the booking and username:
 
 
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/BookedRoom.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/BookedRoom.JPG)
 
 Once a room has been booked, its occupied field is set to true and it is no longer on the rooms list: 
 
 
-![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/ShorterRoomList.JPG)
+![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/ShorterRoomList.JPG)
