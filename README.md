@@ -12,6 +12,7 @@ The project can be run by right clicking run as > spring boot app or java applic
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/readme_branch/hotel-project-auth/screenshots/How%20to%20Run.JPG)
 
 ## Home page
+Located at localhost:8080
 
 ![](https://github.com/RavinderSian/HotelWithAuth/blob/main/hotel-project-auth/screenshots/home_page_full.JPG)
 
