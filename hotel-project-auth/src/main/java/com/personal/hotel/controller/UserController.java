@@ -1,5 +1,6 @@
 package com.personal.hotel.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
@@ -46,7 +48,26 @@ public class UserController {
 		user.setPassword(encoder.encode(user.getPassword()));
 		
 		userRepository.save(user);
+		
 
+		return "redirect:/";
+	}
+	
+	@GetMapping("changepassword")
+	public String changePassword(Model model) {
+		model.addAttribute("password", "");
+		return "changepassword.html";
+	}
+	
+	@PostMapping("changepassword")
+	public String changePasswordPost(Model model, @RequestParam String password,
+			HttpServletRequest request, HttpServletResponse httpServletResponse) {
+		
+		User currentUser = userRepository.findByUsername(request.getUserPrincipal().getName());
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		currentUser.setPassword(encoder.encode(password));
+		userRepository.save(currentUser);
+		
 		return "redirect:/";
 	}
 
