@@ -29,7 +29,7 @@ import com.personal.hotel.services.RoomServices;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class RoomControllerTest {
+class RoomControllerTest {
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -45,12 +45,12 @@ public class RoomControllerTest {
 	}
 
 	@Test
-	public void test_Controller_IsNotNull() {
+	void test_Controller_IsNotNull() {
 		assertThat(controller, not(nullValue()));
 	}
 	
 	@Test
-	public void test_getEmptyRooms_ReturnsCorrectPageAndListOfRooms_WhenCalled() throws Exception {
+	void test_getEmptyRooms_ReturnsCorrectPageAndListOfRooms_WhenCalled() throws Exception {
 		
 		Room room = new Room();
 		room.setId(1L);
@@ -80,7 +80,7 @@ public class RoomControllerTest {
 	}
 	
 	@Test
-	public void test_getEmptyRooms_ReturnsEmptyPage_WhenNoRoomsUnoccupied() throws Exception {
+	void test_getEmptyRooms_ReturnsEmptyPage_WhenNoRoomsUnoccupied() throws Exception {
 		
 		when(services.getEmptyRooms()).thenReturn(new ArrayList<>());
 		
