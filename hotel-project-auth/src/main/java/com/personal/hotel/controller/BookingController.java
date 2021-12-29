@@ -34,6 +34,8 @@ public class BookingController {
 	@GetMapping("/{roomId}/book") //get request as values are visible in url
 	public String bookRoom(Model model, HttpServletRequest request, @PathVariable Long roomId) {
 		
+		StackOverflowError error;
+		
 		User user = userRepository.findByUsername(request.getUserPrincipal().getName());
 		Room room = roomServices.findById(roomId).get();
 		
