@@ -20,6 +20,10 @@ public class DatabaseUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = repository.findByUsername(username);
 		
+		if (user == null) {
+			throw new UsernameNotFoundException("Failed login");
+		}
+		
         List<SimpleGrantedAuthority> grantedAuthorities = new ArrayList<>(Arrays.asList(new SimpleGrantedAuthority(user.getAuthority())));
         if (user.getAuthority() == "ADMIN") {
             grantedAuthorities.add(new SimpleGrantedAuthority("EMPLOYEE"));
