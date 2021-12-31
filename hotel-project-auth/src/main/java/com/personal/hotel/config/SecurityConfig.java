@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 
 import com.personal.hotel.auth.DatabaseUserDetailsService;
+import com.personal.hotel.auth.HotelAuthenticationFailureHandler;
 import com.personal.hotel.auth.UserRepository;
 
 @Configuration
@@ -49,6 +50,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+	
+	@Bean
+    HotelAuthenticationFailureHandler authenticationFailureHandler(){
+        return new HotelAuthenticationFailureHandler();
     }
 	
     @Bean
