@@ -133,12 +133,4 @@ class UserControllerTest {
 				.andExpect(status().isBadRequest());
 	}
 	
-	@WithMockUser(username = "rsian", password = "pw", roles = "USER")
-	@Test
-	void test_Login_ReturnsCorrectStatusAndView_WhenGivenEmptyPassword() throws Exception {
-		mockMvc.perform(post("/login")
-				.param("rsian", "pw"))
-				.andExpect(status().isOk());
-	}
-
 }
