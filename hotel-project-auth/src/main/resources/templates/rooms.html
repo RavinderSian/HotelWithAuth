@@ -20,10 +20,10 @@
 		<h1>About</h1>
 	</div>
 	<div class = "security-text header-text">
-		<h1><a href= "/user/newuser">Register</a></h1>
+		<h1 th:if="${#authentication.getPrincipal() == 'anonymousUser'}"><a href= "/user/newuser">Register</a></h1>
 	</div>
 	<div class = "security-text">
-		<h1><a href= "/login">Login</a></h1>
+		<h1 th:if="${#authentication.getPrincipal() == 'anonymousUser'}"><a href= "/login">Login</a></h1>
 	</div>
 </div>
 

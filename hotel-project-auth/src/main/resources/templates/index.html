@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="/css/home.css">
@@ -22,10 +20,10 @@
 		<h1>About</h1>
 	</div>
 	<div class = "security-text header-text">
-		<h1><a href= "/user/newuser">Register</a></h1>
+		<h1 th:if="${#authentication.getPrincipal() == 'anonymousUser'}"><a href= "/user/newuser">Register</a></h1>
 	</div>
 	<div class = "security-text">
-		<h1><a href= "/login">Login</a></h1>
+		<h1 th:if="${#authentication.getPrincipal() == 'anonymousUser'}"><a href= "/login">Login</a></h1>
 	</div>
 </div>
 
