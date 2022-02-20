@@ -1,55 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="ISO-8859-1">
-<link rel="stylesheet" href="/css/home.css">
-<title>Your Bookings</title>
-</head>
-<body>
-
-<h1>The <em>Authenticated</em> Hotel</h1>
-
-<div class="headerbox">
-	<div class = "header-text">
-		<h2><a href= "/">Home</a></h2>
-	</div>
-	<div class = "header-text">
-		<h2>Rooms</h2>
-	</div>
-	<div class = "header-text">
-		<h2>About</h2>
-	</div>
-	<div class = "security-text">
-		<h2><a href= "/logout">Logout</a></h2>
-	</div>
-</div>
-
-<div class="grid-container">
-
-	<div class="grid-item">
-		<h1>User:</h1><h1  th:text="${username}"></h1>
-	</div>
-
-  <div class="grid-item">
-  	<table>
-  		<tr>
-  			<th>Booking Id</th>
-  			<th class ="table-padding">Cost</th>
-  			<th class ="table-padding">Room Number</th>
-  			<th class ="table-padding">Created Date</th>
-  			<th class ="table-padding">Last Updated</th>
-  			<th></th>
-  		</tr>
-  		<tr th:each="booking : ${booking}">
-  			<td th:text="${booking.id}"></td>
-  			<td th:text="${booking.cost}"></td>
-  			<td th:text="${room.roomNumber}"></td>
-  			<td th:text="${booking.bookingDate}"></td>
-  			<td th:text="${booking.lastUpdated}"></td>
-  		</tr>
-  	</table>
-  </div>
-</div>
-
-</body>
+	<head>
+		<meta charset="ISO-8859-1">
+		<link rel="stylesheet" href="/css/home.css">
+		<title>Your Bookings</title>
+	</head>
+	
+	<body>
+	
+		<h1>The <em>Authenticated</em> Hotel</h1>
+		
+		<nav>
+			<h2 class=><a href= "/">Home</a></h2>
+			<h2>Rooms</h2>
+			<h2>About</h2>
+			<h2 class = "security-text"><a href= "/logout">Logout</a></h2>
+		</nav>
+		
+		<article>
+		
+			<div class="grid-item">
+				<th:block th:text="'User: ' + ${username}"></th:block>
+			</div>
+		
+		  <div class="grid-item">
+		  	<table>
+		  		<tr>
+		  			<th>Booking Id</th>
+		  			<th class ="table-padding">Cost</th>
+		  			<th class ="table-padding">Room Number</th>
+		  			<th class ="table-padding">Created Date</th>
+		  			<th class ="table-padding">Last Updated</th>
+		  			<th></th>
+		  		</tr>
+		  		<tr th:each="booking : ${booking}">
+		  			<td th:text="${booking.id}"></td>
+		  			<td th:text="${booking.cost}"></td>
+		  			<td th:text="${room.roomNumber}"></td>
+		  			<td th:text="${booking.bookingDate}"></td>
+		  			<td th:text="${booking.lastUpdated}"></td>
+		  		</tr>
+		  	</table>
+		  </div>
+		</article>
+	
+	</body>
 </html>
