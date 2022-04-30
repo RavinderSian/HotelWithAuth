@@ -1,0 +1,65 @@
+@charset "ISO-8859-1";
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+h1 {
+	color: rgb(65, 115, 190);
+	text-align: center;
+}
+
+h2 {
+	display: inline;
+}
+
+p {
+	color: black;
+}
+
+a:hover {
+	background-color: aqua;
+	color: red;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	row-gap: 10px;
+}
+
+body {
+  background-color: lightblue;
+  background-image: url('https://wallpaperaccess.com/full/2690553.jpg');
+  background-size: cover;
+}
+
+nav {
+	display: flex;
+	background-image: url('https://www.toptal.com/designers/subtlepatterns/uploads/moroccan-flower-dark.png');
+  	background-size: cover;
+  	grid-column: 1/-1;
+  	align-items: center;
+  	gap: 50px;
+  	padding-bottom: 20px;
+}
+
+.logo {
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-bottom: 5px;
+}
+
+.navigation-text {
+	display:flex;
+	width:100%;
+	justify-content: space-evenly;
+	font-size: 18px;
+}
+
+.room-table {
+	font-size: 25px;
+	background-color: orange, 30%;
+}

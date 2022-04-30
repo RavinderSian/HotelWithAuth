@@ -2,42 +2,48 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="ISO-8859-1">
-		<link rel="stylesheet" href="/css/home.css">
+		<link rel="stylesheet" href="/css/rooms.css">
 		<title>Rooms</title>
 	</head>
+	
 	<body>
-	
-		<header>
-			<h1>The <em>Authenticated</em> Hotel</h1>
-		</header>
-		
-		<nav>
-			<h2><a href= "/">Home</a></h2>
-			<h2>Rooms</h2>
-			<h2>About</h2>
-			<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}" class = "security-text"><a href= "/user/newuser">Register</a></h2>
-			<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}" class = "security-text"><a href= "/login">Login</a></h2>
-		</nav>
-		
-		
-		<article>
-		  <div class="grid-item">
-		  	<table>
-		  		<tr>
-		  			<th>Room Number</th>
-		  			<th class ="table-padding">Capacity</th>
-		  			<th class ="table-padding">Price</th>
-		  			<th></th>
-		  		</tr>
-		  		<tr th:each="room : ${rooms}">
-		  			<td th:text="${room.roomNumber}"></td>
-		  			<td th:text="${room.capacity}"></td>
-		  			<td th:text="${room.price}"></td>
-		  			<td><a th:href= "@{/booking/{id}/book(id=${room.id})}">Book</a></td>
-		  		</tr>
-		  	</table>
-		  </div>
-		</article>
-	
+		<div class = "container">
+			
+			<nav>
+				
+				<img src = "https://i.pinimg.com/originals/de/f7/b6/def7b694904830d5804ee5975b69e9ed.png"
+				alt="authenticated hotel logo"
+				class = "logo"
+				height = "50px"
+				width = "150px">
+			
+				<div class = "navigation-text">
+					<h2><a href= "/">Home</a></h2>
+					<h2>About</h2>
+					<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}"><a href= "/user/newuser">Register</a></h2>
+					<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}"><a href= "/login">Login</a></h2>
+				</div>
+			</nav>
+			
+			
+			<article>
+			  <div class="room-table">
+			  	<table>
+			  		<tr>
+			  			<th>Room Number</th>
+			  			<th class ="table-padding">Capacity</th>
+			  			<th class ="table-padding">Price</th>
+			  			<th></th>
+			  		</tr>
+			  		<tr th:each="room : ${rooms}">
+			  			<td th:text="${room.roomNumber}"></td>
+			  			<td th:text="${room.capacity}"></td>
+			  			<td th:text="${room.price}"></td>
+			  			<td><a th:href= "@{/booking/{id}/book(id=${room.id})}">Book</a></td>
+			  		</tr>
+			  	</table>
+			  </div>
+			</article>
+		</div>
 	</body>
 </html>
