@@ -12,8 +12,8 @@
 }
 
 h1 {
-	color: rgb(65, 115, 190);
-	text-align: center;
+  color: rgb(65, 115, 190);
+  text-align: center;
 }
 
 h2 {
@@ -22,10 +22,31 @@ h2 {
 
 .slotmachine {
   display: flex;
+  justify-content: center;
   gap: 10px;
 }
 
 .slot {
-  background-color: black;
-  padding: 10px;
+  border: 5px solid black;
+  padding: 100px;
+}
+
+.slot-icon {
+  stroke: #087f5b;
+  width: 24px;
+  height: 24px;
+}
+
+.hidden {
+  display: none;
+}
+
+.slot {
+  border: 5px solid black;
+  padding: 100px;
+}
+
+.btn-slot {
+  background-color: green;
+  padding: 20px;
 }
