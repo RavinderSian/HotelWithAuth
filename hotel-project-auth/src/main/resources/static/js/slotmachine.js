@@ -7,21 +7,12 @@ const slot3 = document.querySelector(".slot--3");
 
 let slotIcon = 1;
 
-console.log(slotButton);
-
-const changeSlot = function (count) {
-  console.log("clicked");
-  slot1.src = `/images/slot-item-${count}.svg`;
-};
-
 var i = 1; //  set your counter to 1
 
 
 const changeSlotDelay = function() {
 	
 	let slotIcon = 1;
-	//const slotTest = document.querySelector(`.slot--${slot}`);
-	//console.log(slotTest);
 	
 	(function loopIt(i) {
 	  setTimeout(function (){
@@ -39,28 +30,45 @@ const changeSlotDelay = function() {
 	      if(i < 20)  loopIt(i);
 	    }, 100);
 	})(0)
+	
+}
+
+const checkWinner = function () {
+	
+	(function winner() {
+	  setTimeout(function (){
+		
+		  console.log("check winner"); 
+		  console.log(slot1.src); 
+  		  console.log(slot2.src);
+  		  
+  		  if (slot1.src === slot2.src){
+			 console.log("winner");
+		  }
+	      
+	      //console.log(i);
+	    }, 10000);
+	})()
 }
 
 slotButton.addEventListener("click", function () {
-  let roll = true;
-  let count = 0;
-
-  while (roll) {
-
-	var i = 0;
-	
+  	
+  	console.log("clicked");
+  	
 	changeSlotDelay();
+	
+//	console.log("delay");
+//	console.log(slot1.src); 
+//  	console.log(slot2.src);
+//	
+//	if (slot1.src === slot2.src){
+//	  console.log("winner");
+//  	}
 
-    count += 1;
-    if (count === 4){
-		roll = false;
-		//clearInterval(intervalSet);
-	} 
+//  console.log("out of loop");
+//  console.log(slot1.src); 
+//  console.log(slot2.src);
 
-  }
-  
-	if (slot1.src === slot2.src && slot2.src === slot3.src){
-		console.log("winner");
-	}
-  
+	checkWinner();
+
 });
