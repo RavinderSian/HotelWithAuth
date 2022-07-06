@@ -42,12 +42,12 @@ const checkWinner = function () {
 		  console.log(slot1.src); 
   		  console.log(slot2.src);
   		  
-  		  if (slot1.src === slot2.src){
+  		  if ((slot1.src === slot2.src) && (slot2.src === slot3.src)){
 			 console.log("winner");
 		  }
 	      
 	      //console.log(i);
-	    }, 10000);
+	    }, 3000);
 	})()
 }
 
