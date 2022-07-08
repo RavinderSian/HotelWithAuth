@@ -38,22 +38,26 @@ const checkWinner = function () {
 	(function winner() {
 	  setTimeout(function (){
 		
-		  console.log("check winner"); 
+		  console.log("check winner");
+		  
 		  console.log(slot1.src); 
-  		  console.log(slot2.src);
+		  console.log(slot2.src);
   		  
   		  if ((slot1.src === slot2.src) && (slot2.src === slot3.src)){
 			 console.log("winner");
 		  }
+		  
+		  slotButton.disabled = false;
 	      
-	      //console.log(i);
-	    }, 3000);
+	    }, 2600);
 	})()
 }
 
 slotButton.addEventListener("click", function () {
   	
   	console.log("clicked");
+  	
+  	slotButton.disabled = true;
   	
 	changeSlotDelay();
 	
