@@ -65,3 +65,8 @@ h2 {
 	background-color: #2b8a3e;
 	cursor: pointer;
 }
+
+.btn-slot:disabled {
+  background-color: #e03131;
+  border: 5px solid #c92a2a;
+}

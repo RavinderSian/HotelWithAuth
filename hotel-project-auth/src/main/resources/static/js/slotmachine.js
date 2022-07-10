@@ -5,7 +5,7 @@ const slot1 = document.querySelector(".slot--1");
 const slot2 = document.querySelector(".slot--2");
 const slot3 = document.querySelector(".slot--3");
 
-let slotIcon = 1;
+let tryCounter = 0;
 
 var i = 1; //  set your counter to 1
 
@@ -13,6 +13,7 @@ var i = 1; //  set your counter to 1
 const changeSlotDelay = function() {
 	
 	let slotIcon = 1;
+	tryCounter +=1;
 	
 	(function loopIt(i) {
 	  setTimeout(function (){
@@ -35,27 +36,26 @@ const changeSlotDelay = function() {
 
 const checkWinner = function () {
 	
-	(function winner() {
 	  setTimeout(function (){
 		
-  		  if ((slot1.src === slot2.src) && (slot2.src === slot3.src)){
-			 alert('Congratulations you have won a free stay of up to 1 week');
-			 slotButton.disabled = true;
-		  }else {
-			slotButton.disabled = false;
-		}
-		  
-	      
+	    if ((slot1.src === slot2.src) && (slot2.src === slot3.src)){
+		   alert('Congratulations you have won a free stay of up to 1 week');
+		   slotButton.disabled = true;
+	    }else {
+		  slotButton.disabled = false;
+	    }
 	    }, 2600);
-	})()
 }
 
 slotButton.addEventListener("click", function () {
   	
   	slotButton.disabled = true;
   	
-	changeSlotDelay();
-	
-	checkWinner();
+  	if (tryCounter === 3){
+		alert('Too many attempts');
+	}else {
+		changeSlotDelay();
+		checkWinner();
+	}
 
 });
