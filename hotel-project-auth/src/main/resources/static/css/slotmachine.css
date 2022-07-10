@@ -6,27 +6,35 @@
   box-sizing: border-box;
 }
 
+body {
+background-color: #fcc419;	
+}
+
 .slotmachine-header {
   font-size: 50px;
   text-align: center;
 }
 
 h1 {
-  color: rgb(65, 115, 190);
+  color: #37b24d;
   text-align: center;
 }
 
 h2 {
-  display: block;
+  color: #37b24d;
+  text-align: center;
 }
 
 .slotmachine {
   display: flex;
   justify-content: center;
   gap: 10px;
+      align-items: center;
+  
 }
 
 .slot {
+  margin-top:10px;
   border: 5px solid black;
   padding: 100px;
 }
@@ -47,6 +55,13 @@ h2 {
 }
 
 .btn-slot {
-  background-color: green;
+  background-color: #2f9e44;
+  border-radius: 15px;
   padding: 20px;
+  border: 5px solid #2b8a3e;
+}
+
+.btn-slot:hover {
+	background-color: #2b8a3e;
+	cursor: pointer;
 }

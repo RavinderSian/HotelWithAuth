@@ -38,16 +38,13 @@ const checkWinner = function () {
 	(function winner() {
 	  setTimeout(function (){
 		
-		  console.log("check winner");
-		  
-		  console.log(slot1.src); 
-		  console.log(slot2.src);
-  		  
   		  if ((slot1.src === slot2.src) && (slot2.src === slot3.src)){
-			 console.log("winner");
-		  }
+			 alert('Congratulations you have won a free stay of up to 1 week');
+			 slotButton.disabled = true;
+		  }else {
+			slotButton.disabled = false;
+		}
 		  
-		  slotButton.disabled = false;
 	      
 	    }, 2600);
 	})()
@@ -55,24 +52,10 @@ const checkWinner = function () {
 
 slotButton.addEventListener("click", function () {
   	
-  	console.log("clicked");
-  	
   	slotButton.disabled = true;
   	
 	changeSlotDelay();
 	
-//	console.log("delay");
-//	console.log(slot1.src); 
-//  	console.log(slot2.src);
-//	
-//	if (slot1.src === slot2.src){
-//	  console.log("winner");
-//  	}
-
-//  console.log("out of loop");
-//  console.log(slot1.src); 
-//  console.log(slot2.src);
-
 	checkWinner();
 
 });
