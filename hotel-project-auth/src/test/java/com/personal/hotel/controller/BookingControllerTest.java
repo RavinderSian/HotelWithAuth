@@ -26,6 +26,7 @@ import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
 import com.personal.hotel.model.Booking;
 import com.personal.hotel.model.Room;
+import com.personal.hotel.publishers.RoomBookedEventPublisher;
 import com.personal.hotel.services.BookingServices;
 import com.personal.hotel.services.RoomServices;
 
@@ -46,19 +47,22 @@ public class BookingControllerTest {
 	@MockBean
 	private UserRepository userRepository;
 	
+	@MockBean
+	private RoomBookedEventPublisher publisher;
+	
 	@BeforeEach
-	public void setUp() throws Exception {
-		this.controller = new BookingController(services, roomServices, userRepository);
+	void setUp() throws Exception {
+		this.controller = new BookingController(services, roomServices, userRepository, publisher);
 	}
 	
 	@Test
-	public void test_Controller_IsNotNull() {
+	void test_Controller_IsNotNull() {
 		assertThat(controller, not(nullValue()));
 	}
 	
 	@Test
 	@WithMockUser(username = "rsian", password = "pw", roles = "USER")
-	public void test_BookRoom_ReturnsCorrectViewAndPage_WhenCalled() throws Exception {
+	void test_BookRoom_ReturnsCorrectViewAndPage_WhenCalled() throws Exception {
 		
 		User user = new User();
 		user.setUsername("rsian");
