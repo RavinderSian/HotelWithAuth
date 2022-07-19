@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import com.personal.hotel.model.DiscountCode;
 import com.personal.hotel.repository.DiscountCodeRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class DiscountCodeServiceImpl implements DiscountCodeService {
 	
@@ -33,6 +36,8 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
 		    stringBuilder.append(randomChar);
 		    
 	    }
+	    
+	    log.info("discount code created" + discountCode.getCode());
 	    
 	    repository.save(discountCode);
 	    

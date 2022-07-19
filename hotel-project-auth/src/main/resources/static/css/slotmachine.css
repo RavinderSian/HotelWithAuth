@@ -29,7 +29,7 @@ h2 {
   display: flex;
   justify-content: center;
   gap: 10px;
-      align-items: center;
+  align-items: center;
   
 }
 
@@ -54,19 +54,27 @@ h2 {
   padding: 100px;
 }
 
-.btn-slot {
+.btn--slot {
   background-color: #2f9e44;
   border-radius: 15px;
   padding: 20px;
   border: 5px solid #2b8a3e;
 }
 
-.btn-slot:hover {
+.btn--slot:hover {
 	background-color: #2b8a3e;
 	cursor: pointer;
 }
 
-.btn-slot:disabled {
+.btn--slot:disabled {
   background-color: #e03131;
   border: 5px solid #c92a2a;
+}
+
+.winner-display {
+	text-align:center;
+}
+
+.btn--winner {
+	font-size: 50px;
 }

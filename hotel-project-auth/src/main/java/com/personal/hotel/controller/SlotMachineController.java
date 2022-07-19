@@ -24,13 +24,8 @@ public class SlotMachineController {
 	@Autowired
 	private DiscountCodeService discountCodeService;
 	
-	@Autowired
-	
-	
-	@GetMapping("/slotmachine")
-	public String slotMachine(Model model) {
-		
-		
+	@GetMapping("/")
+	public String slotMachine() {
 		
 		return "slotmachine.html";
 	}

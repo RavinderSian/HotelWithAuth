@@ -1,9 +1,11 @@
 "use strict";
 
-const slotButton = document.querySelector(".btn-slot");
+const slotButton = document.querySelector(".btn--slot");
 const slot1 = document.querySelector(".slot--1");
 const slot2 = document.querySelector(".slot--2");
 const slot3 = document.querySelector(".slot--3");
+const winnerButton = document.querySelector(".btn--winner");
+
 
 let tryCounter = 0;
 
@@ -41,6 +43,7 @@ const checkWinner = function () {
 	    if ((slot1.src === slot2.src) && (slot2.src === slot3.src)){
 		   alert('Congratulations you have won a free stay of up to 1 week');
 		   slotButton.disabled = true;
+		   winnerButton.classList.toggle('hidden');
 	    }else {
 		  slotButton.disabled = false;
 	    }
