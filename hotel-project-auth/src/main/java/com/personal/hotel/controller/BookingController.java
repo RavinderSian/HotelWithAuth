@@ -13,6 +13,7 @@ import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
 import com.personal.hotel.model.Booking;
 import com.personal.hotel.model.Room;
+import com.personal.hotel.publishers.RoomBookedEventPublisher;
 import com.personal.hotel.services.BookingServices;
 import com.personal.hotel.services.RoomServices;
 
@@ -24,11 +25,14 @@ public class BookingController {
 	private final BookingServices services;
 	private final RoomServices roomServices;
 	private final UserRepository userRepository;
+	private final RoomBookedEventPublisher publisher;
 
-	public BookingController(BookingServices services, RoomServices roomServices, UserRepository userRepository) {
+	public BookingController(BookingServices services, RoomServices roomServices, 
+			UserRepository userRepository, RoomBookedEventPublisher publisher) {
 		this.services = services;
 		this.roomServices = roomServices;
 		this.userRepository = userRepository;
+		this.publisher = publisher;
 	}
 
 	@GetMapping("/{roomId}/book") //get request as values are visible in url
@@ -48,6 +52,8 @@ public class BookingController {
 		userRepository.save(user);
 		
 		roomServices.save(room);
+		
+		 publisher.publishRoomBookedEvent(1L);
 		
 		return "redirect:/booking/yourbooking";
 	}
