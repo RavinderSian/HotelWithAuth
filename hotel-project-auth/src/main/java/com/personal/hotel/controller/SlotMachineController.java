@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.personal.hotel.communication.SendEmail;
 import com.personal.hotel.model.DiscountCode;
 import com.personal.hotel.services.DiscountCodeService;
 
@@ -24,7 +25,11 @@ public class SlotMachineController {
 	@Autowired
 	private DiscountCodeService discountCodeService;
 	
-	@GetMapping("/")
+
+	@Autowired
+	private SendEmail emailSender;
+	
+	@GetMapping
 	public String slotMachine() {
 		
 		return "slotmachine.html";
