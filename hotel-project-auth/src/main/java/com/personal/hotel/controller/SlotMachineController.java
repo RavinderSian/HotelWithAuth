@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.personal.hotel.communication.SendEmail;
+import com.personal.hotel.events.SlotMachineWonEvent;
 import com.personal.hotel.model.DiscountCode;
+import com.personal.hotel.publishers.SlotMachineWonEventPublisher;
 import com.personal.hotel.services.DiscountCodeService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,29 +24,32 @@ import lombok.extern.slf4j.Slf4j;
 @PreAuthorize("hasRole('USER')")
 public class SlotMachineController {
 	
-	@Autowired
-	private DiscountCodeService discountCodeService;
+	private final DiscountCodeService discountCodeService;
 	
+	private final SlotMachineWonEventPublisher slotMachineWonEventPublisher;
+	
+	public SlotMachineController(DiscountCodeService discountCodeService,
+			SlotMachineWonEventPublisher slotMachineWonEventPublisher) {
+		this.discountCodeService = discountCodeService;
+		this.slotMachineWonEventPublisher = slotMachineWonEventPublisher;
+	}
 
-	@Autowired
-	private SendEmail emailSender;
-	
 	@GetMapping
 	public String slotMachine() {
-		
 		return "slotmachine.html";
 	}
 	
-	@PostMapping("/winner")
+	@GetMapping("/winner")
 	public String slotMachineWinner(HttpServletRequest request) {
-		
-		DiscountCode discountCode = discountCodeService.generateDiscountCode(40);
 		
 		String loggedInUser =  request.getUserPrincipal().getName();
 		
+		slotMachineWonEventPublisher.publishSlotMachineWonEvent(loggedInUser, 
+				discountCodeService.generateDiscountCode(40).getCode());
+		
 		log.info("User has won: " + loggedInUser);
 		
-		return ":/";
+		return "redirect:/";
 	}
 	
 }
