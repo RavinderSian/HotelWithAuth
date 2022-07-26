@@ -30,16 +30,14 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
         
         StringBuilder stringBuilder = new StringBuilder(8);
 
-	    for (int i = 0; stringBuilder.length()<9; i++) {
-		    log.info("discount code created");
+	    while (stringBuilder.length()<9) {
 		    char randomChar = CHARACTERS.charAt(random.nextInt(CHARACTERS.length()));
-		    log.info("discount code created " + randomChar);
 		    stringBuilder.append(randomChar);
 	    }
 	    
 	    discountCode.setCode(stringBuilder.toString());
 	    
-	    log.info("discount code created" + discountCode.getCode());
+	    log.info("discount code created");
 	    repository.save(discountCode);
 	    
 		return discountCode;
