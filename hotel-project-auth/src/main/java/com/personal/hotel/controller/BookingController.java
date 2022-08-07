@@ -53,7 +53,7 @@ public class BookingController {
 		
 		roomServices.save(room);
 		
-		 publisher.publishRoomBookedEvent(1L);
+		publisher.publishRoomBookedEvent(1L);
 		
 		return "redirect:/booking/yourbooking";
 	}

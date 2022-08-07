@@ -25,6 +25,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.personal.hotel.model.Room;
+import com.personal.hotel.services.DiscountCodeService;
 import com.personal.hotel.services.RoomServices;
 
 @SpringBootTest
@@ -39,9 +40,12 @@ class RoomControllerTest {
 	@MockBean
 	private RoomServices services;
 	
+	@MockBean
+	private DiscountCodeService discountCodeService;
+	
 	@BeforeEach
 	public void setUp() throws Exception {
-		this.controller = new RoomController(services);
+		this.controller = new RoomController(services, discountCodeService);
 	}
 
 	@Test

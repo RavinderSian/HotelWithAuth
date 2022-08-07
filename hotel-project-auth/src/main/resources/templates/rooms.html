@@ -19,7 +19,6 @@
 			<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}" class = "security-text"><a href= "/login">Login</a></h2>
 		</nav>
 		
-		
 		<article>
 		  <div class="grid-item">
 		  	<table>
@@ -36,6 +35,13 @@
 		  			<td><a th:href= "@{/booking/{id}/book(id=${room.id})}">Book</a></td>
 		  		</tr>
 		  	</table>
+		  	
+		  	<h2>Discount Code</h2>
+		  	<form th:action="''" th:object="${discountCode}" method="post">
+		  		<input type=text  maxlength="8" th:field="*{code}">
+		  		<button type="submit" class = "btn-submit"></button>
+		  	</form>
+		  	
 		  </div>
 		</article>
 	

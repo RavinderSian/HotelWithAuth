@@ -29,7 +29,7 @@ public class DiscountCode {
 
 	@Max(value = 100)
 	@Column(name = "discount_percentage")
-	private int discountPercentage;
+	private Double discountPercentage;
 	
 	@Column(name = "creation_date")
 	@CreationTimestamp

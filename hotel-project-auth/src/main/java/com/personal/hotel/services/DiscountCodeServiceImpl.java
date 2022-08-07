@@ -1,5 +1,6 @@
 package com.personal.hotel.services;
 
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
 		
 		DiscountCode discountCode = new DiscountCode();
 		discountCode.setExpired(false);
-		discountCode.setDiscountPercentage(percentage);
+		discountCode.setDiscountPercentage(Double.valueOf(percentage));
 		
         Random random = new Random();
         
@@ -41,6 +42,19 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
 	    repository.save(discountCode);
 	    
 		return discountCode;
+	}
+
+	@Override
+	public Optional<DiscountCode> verifyDiscountCode(String discountCode) {
+		
+		Optional<DiscountCode> result = repository.findByCode(discountCode);
+		
+		if (result.isPresent()) {
+			return result.get().isExpired() ? Optional.empty() : result;
+		}else {
+			return Optional.empty();
+		}
+		
 	}
 	
 }

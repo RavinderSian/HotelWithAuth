@@ -62,7 +62,7 @@ public class User {
 	@Getter
 	@Setter
 	@CreditCardNumber(message = "please enter a valid card number")
-	@Column(name = "bank_card")
+	@Column(name = "card_number")
 	private String cardNumber;
 	
 	@Getter

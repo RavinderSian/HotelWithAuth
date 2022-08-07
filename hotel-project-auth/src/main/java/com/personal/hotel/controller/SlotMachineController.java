@@ -2,17 +2,11 @@ package com.personal.hotel.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.personal.hotel.communication.SendEmail;
-import com.personal.hotel.events.SlotMachineWonEvent;
-import com.personal.hotel.model.DiscountCode;
 import com.personal.hotel.publishers.SlotMachineWonEventPublisher;
 import com.personal.hotel.services.DiscountCodeService;
 
