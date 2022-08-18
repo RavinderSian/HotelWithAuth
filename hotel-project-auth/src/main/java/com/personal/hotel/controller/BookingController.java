@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
 import com.personal.hotel.model.Booking;
+import com.personal.hotel.model.DiscountCode;
 import com.personal.hotel.model.Room;
 import com.personal.hotel.publishers.RoomBookedEventPublisher;
 import com.personal.hotel.services.BookingServices;
@@ -35,8 +36,8 @@ public class BookingController {
 		this.publisher = publisher;
 	}
 
-	@GetMapping("/{roomId}/book") //get request as values are visible in url
-	public String bookRoom(Model model, HttpServletRequest request, @PathVariable Long roomId) {
+	@GetMapping("/{roomId}/book/{discountCodeString}") //get request as values are visible in url
+	public String bookRoom(Model model, HttpServletRequest request, @PathVariable Long roomId, @PathVariable String discountCodeString) {
 		
 		User user = userRepository.findByUsername(request.getUserPrincipal().getName());
 		Room room = roomServices.findById(roomId).get();

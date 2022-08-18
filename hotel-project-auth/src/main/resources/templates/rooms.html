@@ -32,7 +32,7 @@
 		  			<td th:text="${room.roomNumber}"></td>
 		  			<td th:text="${room.capacity}"></td>
 		  			<td th:text="${room.price}"></td>
-		  			<td><a th:href= "@{/booking/{id}/book(id=${room.id})}">Book</a></td>
+		  			<td><a th:href= "@{/booking/{id}/book/{discountCode}(id=${room.id}, discountCode=${discountCodeString})}">Book</a></td>
 		  		</tr>
 		  	</table>
 		  	
