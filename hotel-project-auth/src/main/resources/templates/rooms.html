@@ -37,9 +37,9 @@
 		  	</table>
 		  	
 		  	<h2>Discount Code</h2>
-		  	<form th:action="''" th:object="${discountCode}" method="post">
-		  		<input type=text  maxlength="8" th:field="*{code}">
-		  		<button type="submit" class = "btn-submit"></button>
+		  	<form th:action="''" th:object="${discountCode}" method="post" id="discountForm">
+		  		<input type=text  maxlength="8" pattern="[A-Za-z]{8}" th:field="*{code}">
+		  		<button  type="submit" class = "btn-submit"></button>
 		  	</form>
 		  	
 		  </div>
