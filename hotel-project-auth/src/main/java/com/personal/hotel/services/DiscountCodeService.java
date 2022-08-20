@@ -9,4 +9,8 @@ public interface DiscountCodeService {
 	DiscountCode generateDiscountCode(int percentage);
 
 	Optional<DiscountCode> verifyDiscountCode(String discountCode);
+
+	Optional<DiscountCode> findByDiscountCode(String discountCode);
+	
+	void saveAsExpired(Long id);
 }

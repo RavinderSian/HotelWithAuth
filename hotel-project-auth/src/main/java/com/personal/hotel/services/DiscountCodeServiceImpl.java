@@ -57,4 +57,23 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
 		
 	}
 	
+	@Override
+	public Optional<DiscountCode> findByDiscountCode(String discountCode) {
+		
+		Optional<DiscountCode> result = repository.findByCode(discountCode);
+		
+		return result.isPresent() ? result : Optional.empty();
+		
+	}
+	
+	@Override
+	public void saveAsExpired(Long id) {
+		
+		Optional<DiscountCode> discountCodeOptional = repository.findById(id);
+		
+		discountCodeOptional.get().setExpired(true);
+		
+		repository.save(discountCodeOptional.get());
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.personal.hotel.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +18,7 @@ import com.personal.hotel.model.DiscountCode;
 import com.personal.hotel.model.Room;
 import com.personal.hotel.publishers.RoomBookedEventPublisher;
 import com.personal.hotel.services.BookingServices;
+import com.personal.hotel.services.DiscountCodeService;
 import com.personal.hotel.services.RoomServices;
 
 @PreAuthorize("hasRole('USER')")
@@ -27,13 +30,15 @@ public class BookingController {
 	private final RoomServices roomServices;
 	private final UserRepository userRepository;
 	private final RoomBookedEventPublisher publisher;
+	private final DiscountCodeService discountCodeService;
 
 	public BookingController(BookingServices services, RoomServices roomServices, 
-			UserRepository userRepository, RoomBookedEventPublisher publisher) {
+			UserRepository userRepository, RoomBookedEventPublisher publisher, DiscountCodeService discountCodeService) {
 		this.services = services;
 		this.roomServices = roomServices;
 		this.userRepository = userRepository;
 		this.publisher = publisher;
+		this.discountCodeService = discountCodeService;
 	}
 
 	@GetMapping("/{roomId}/book/{discountCodeString}") //get request as values are visible in url
@@ -42,17 +47,29 @@ public class BookingController {
 		User user = userRepository.findByUsername(request.getUserPrincipal().getName());
 		Room room = roomServices.findById(roomId).get();
 		
+		Optional<DiscountCode> discountCodeOptional = discountCodeService.findByDiscountCode(discountCodeString);
+		
 		room.setOccupied(true);
 		Booking booking = new Booking();
 		booking.setRoom(room);
 		booking.setUser(user);
-		booking.setCost(room.getPrice());
+		
+		if (discountCodeOptional.isPresent()) {
+			booking.setCost(room.getPrice() * ((100 - discountCodeOptional.get().getDiscountPercentage())/100));
+			discountCodeService.saveAsExpired(discountCodeOptional.get().getId());
+		} else {
+			booking.setCost(room.getPrice());
+		}
+		
 		services.save(booking);
 		
 		user.setBooking(booking);
 		userRepository.save(user);
 		
 		roomServices.save(room);
+		
+		System.out.println(booking.getCost() + "----------------------");
+		System.out.println(booking.getCost() + "----------------------");
 		
 		publisher.publishRoomBookedEvent(1L);
 		
