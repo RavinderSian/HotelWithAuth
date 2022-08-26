@@ -55,9 +55,9 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
 		
 		if (result.isPresent()) {
 			return result.get().isExpired() ? Optional.empty() : result;
-		}else {
-			return Optional.empty();
 		}
+		
+		return result;
 		
 	}
 	

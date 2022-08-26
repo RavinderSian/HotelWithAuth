@@ -52,5 +52,13 @@ class DiscountCodeServiceImplTest {
 		assertThat(result.isEmpty(), equalTo(true));
 
 	}
+	
+	@Test
+	void test_VerifyDiscountCode_ReturnsEmptyOptional_WhenDiscountCodeDoesNotExist() {
+		
+		Optional<DiscountCode> result = service.verifyDiscountCode("AAAAAAAA");
+		assertThat(result.isEmpty(), equalTo(true));
+
+	}
 
 }
