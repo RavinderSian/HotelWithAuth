@@ -17,6 +17,10 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
 	
 	@Autowired
 	private DiscountCodeRepository repository;
+	
+	public DiscountCodeServiceImpl(DiscountCodeRepository repository) {
+		this.repository = repository;
+	}
 
 	private final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 	
@@ -31,7 +35,7 @@ public class DiscountCodeServiceImpl implements DiscountCodeService {
         
         StringBuilder stringBuilder = new StringBuilder(8);
 
-	    while (stringBuilder.length()<9) {
+	    while (stringBuilder.length()<8) {
 		    char randomChar = CHARACTERS.charAt(random.nextInt(CHARACTERS.length()));
 		    stringBuilder.append(randomChar);
 	    }
