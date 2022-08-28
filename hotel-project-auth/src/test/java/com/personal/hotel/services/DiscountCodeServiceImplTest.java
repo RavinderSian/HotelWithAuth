@@ -1,6 +1,5 @@
 package com.personal.hotel.services;
 
-import static org.assertj.core.api.Assertions.fail;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
@@ -58,6 +57,43 @@ class DiscountCodeServiceImplTest {
 		
 		Optional<DiscountCode> result = service.verifyDiscountCode("AAAAAAAA");
 		assertThat(result.isEmpty(), equalTo(true));
+
+	}
+	
+	@Test
+	void test_VerifyDiscountCode_ReturnsDiscountCodeOptional_WhenDiscountCodeNotExpired() {
+		
+		DiscountCode discountCode = new DiscountCode();
+		discountCode.setCode("AAAAAAAA");
+		discountCode.setExpired(true);
+		
+		when(repository.findByCode("AAAAAAAA")).thenReturn(Optional.of(discountCode));
+		
+		Optional<DiscountCode> result = service.verifyDiscountCode("AAAAAAAA");
+		assertThat(result.isEmpty(), equalTo(true));
+
+	}
+	
+	@Test
+	void test_FindByDiscountCode_ReturnsDiscountCodeOptional_WhenDiscountCodePresent() {
+		
+		DiscountCode discountCode = new DiscountCode();
+		discountCode.setCode("AAAAAAAA");
+		discountCode.setExpired(false);
+		
+		when(repository.findByCode("AAAAAAAA")).thenReturn(Optional.of(discountCode));
+		Optional<DiscountCode> result = service.findByDiscountCode("AAAAAAAA");
+		
+		assertThat(result.get(), equalTo(discountCode));
+
+	}
+	
+	@Test
+	void test_FindByDiscountCode_ReturnsEmptyOptional_WhenDiscountCodeNotPresent() {
+		
+		Optional<DiscountCode> result = service.findByDiscountCode("AAAAAAAA");
+		
+		assertThat(result, equalTo(Optional.empty()));
 
 	}
 
