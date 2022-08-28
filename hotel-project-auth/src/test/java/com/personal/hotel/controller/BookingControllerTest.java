@@ -25,13 +25,15 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.personal.hotel.auth.User;
 import com.personal.hotel.auth.UserRepository;
 import com.personal.hotel.model.Booking;
+import com.personal.hotel.model.DiscountCode;
 import com.personal.hotel.model.Room;
 import com.personal.hotel.publishers.RoomBookedEventPublisher;
 import com.personal.hotel.services.BookingServices;
+import com.personal.hotel.services.DiscountCodeService;
 import com.personal.hotel.services.RoomServices;
 
 @WebMvcTest(BookingController.class)
-public class BookingControllerTest {
+class BookingControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -50,19 +52,27 @@ public class BookingControllerTest {
 	@MockBean
 	private RoomBookedEventPublisher publisher;
 	
+	@MockBean
+	private DiscountCodeService discountCodeService;
+	
 	@BeforeEach
 	void setUp() throws Exception {
-		this.controller = new BookingController(services, roomServices, userRepository, publisher);
+		this.controller = new BookingController(services, roomServices, userRepository, publisher, discountCodeService);
 	}
 	
 	@Test
 	void test_Controller_IsNotNull() {
 		assertThat(controller, not(nullValue()));
+		assertThat(services, not(nullValue()));
+		assertThat(roomServices, not(nullValue()));
+		assertThat(userRepository, not(nullValue()));
+		assertThat(publisher, not(nullValue()));
+
 	}
 	
 	@Test
 	@WithMockUser(username = "rsian", password = "pw", roles = "USER")
-	void test_BookRoom_ReturnsCorrectViewAndPage_WhenCalled() throws Exception {
+	void test_BookRoom_ReturnsCorrectViewAndPage_WhenCalledWithoutDiscountCode() throws Exception {
 		
 		User user = new User();
 		user.setUsername("rsian");
@@ -75,9 +85,9 @@ public class BookingControllerTest {
 		when(roomServices.findById(1L)).thenReturn(Optional.of(room));
 		when(userRepository.findByUsername("rsian")).thenReturn(user);
 		
-		mockMvc.perform(get("/booking/1/book"))
-		.andExpect(redirectedUrl("/booking/yourbooking"))
-		.andExpect(status().isFound());
+		mockMvc.perform(get("/booking/1/book/ "))
+		.andExpect(status().isFound())
+		.andExpect(redirectedUrl("/booking/yourbooking"));
 		
 		verify(userRepository, times(1)).findByUsername("rsian");
 		verify(userRepository, times(1)).save(user);
@@ -88,7 +98,47 @@ public class BookingControllerTest {
 	
 	@Test
 	@WithMockUser(username = "rsian", password = "pw", roles = "USER")
-	public void test_YourBooking_ReturnsCorrectViewAndPage_WhenBookingPresent() throws Exception {
+	void test_BookRoom_ReturnsCorrectViewAndPage_WhenCalledWithDiscountCode() throws Exception {
+		
+		User user = new User();
+		user.setUsername("rsian");
+		user.setPassword("rs");
+		user.setAuthority("USER");
+		
+		Room room = new Room();
+		room.setCapacity(2);
+		room.setOccupied(false);
+		room.setPrice(Double.valueOf(40));
+		
+		DiscountCode discountCode = new DiscountCode();
+		discountCode.setCode("AAAAAAAA");
+		discountCode.setExpired(false);
+		discountCode.setDiscountPercentage(Double.valueOf(40));
+		
+		Booking booking = new Booking();
+		booking.setRoom(room);
+		booking.setUser(user);
+		booking.setCost(room.getPrice()*(100 - discountCode.getDiscountPercentage())/100);
+		
+		when(roomServices.findById(1L)).thenReturn(Optional.of(room));
+		when(userRepository.findByUsername("rsian")).thenReturn(user);
+		when(discountCodeService.findByDiscountCode("AAAAAAAA")).thenReturn(Optional.of(discountCode));
+		
+		mockMvc.perform(get("/booking/1/book/AAAAAAAA"))
+		.andExpect(status().isFound())
+		.andExpect(redirectedUrl("/booking/yourbooking"));
+		
+		verify(userRepository, times(1)).findByUsername("rsian");
+		verify(userRepository, times(1)).save(user);
+		verify(roomServices, times(1)).findById(1L);
+		verify(roomServices, times(1)).save(room);
+		verify(services, times(1)).save(booking);
+
+	}
+	
+	@Test
+	@WithMockUser(username = "rsian", password = "pw", roles = "USER")
+	void test_YourBooking_ReturnsCorrectViewAndPage_WhenBookingPresent() throws Exception {
 		
 		User user = new User();
 		user.setUsername("rsian");
@@ -116,6 +166,5 @@ public class BookingControllerTest {
 		
 		verify(userRepository, times(1)).findByUsername("rsian");
 	}
-	
 	
 }

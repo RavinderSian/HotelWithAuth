@@ -61,15 +61,13 @@ public class BookingController {
 			booking.setCost(room.getPrice());
 		}
 		
+		
 		services.save(booking);
 		
 		user.setBooking(booking);
 		userRepository.save(user);
 		
 		roomServices.save(room);
-		
-		System.out.println(booking.getCost() + "----------------------");
-		System.out.println(booking.getCost() + "----------------------");
 		
 		publisher.publishRoomBookedEvent(1L);
 		
