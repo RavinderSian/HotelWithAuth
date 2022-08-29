@@ -40,10 +40,6 @@ public class RoomController {
 		
 		Optional<DiscountCode> discount = discountCodeService.verifyDiscountCode(discountCode.getCode());
 		
-		if (discount.isEmpty()) {
-			
-		}
-		
 		List<Room> rooms = service.getEmptyRooms();
 		rooms.forEach(room -> room.setPrice(room.getPrice() * ( (100 - discount.get().getDiscountPercentage())/100)));
 		

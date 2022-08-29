@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 		<meta charset="ISO-8859-1">
-		<link rel="stylesheet" href="/css/home.css">
+		<link rel="stylesheet" href="/css/rooms.css">
 		<title>Rooms</title>
 	</head>
 	<body>
@@ -38,12 +38,12 @@
 		  	
 		  	<h2>Discount Code</h2>
 		  	<form th:action="''" th:object="${discountCode}" method="post" id="discountForm">
-		  		<input type=text  maxlength="8" pattern="[A-Za-z]{8}" th:field="*{code}">
-		  		<button  type="submit" class = "btn-submit"></button>
+			<input class="code-submit" type=text  maxlength="8" th:field="*{code}">
+			<button  type="submit" class = "btn-submit">Submit</button>
 		  	</form>
 		  	
 		  </div>
 		</article>
-	
+	<script src = "js/rooms.js"></script>
 	</body>
 </html>
