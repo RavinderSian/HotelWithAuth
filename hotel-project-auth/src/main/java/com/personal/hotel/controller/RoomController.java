@@ -39,14 +39,19 @@ public class RoomController {
 	public String applyDiscount(DiscountCode discountCode, Model model) {
 		
 		Optional<DiscountCode> discount = discountCodeService.verifyDiscountCode(discountCode.getCode());
-		
-		
 		List<Room> rooms = service.getEmptyRooms();
-		rooms.forEach(room -> room.setPrice(room.getPrice() * ( (100 - discount.get().getDiscountPercentage())/100)));
-		
-		model.addAttribute("discountCodeString", discount.get().getCode());
-		model.addAttribute("rooms", rooms);
 
+		if (discount.isPresent()) {
+			rooms.forEach(room -> room.setPrice(room.getPrice() * ( (100 - discount.get().getDiscountPercentage())/100)));
+			
+			model.addAttribute("discountCodeString", discount.get().getCode());
+			model.addAttribute("rooms", rooms);
+		} else {
+			
+			model.addAttribute("discountCodeString", " ");
+			model.addAttribute("rooms", rooms);
+			
+		}
 		
 		return "rooms";
 	}
