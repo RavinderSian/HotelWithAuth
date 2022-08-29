@@ -145,7 +145,7 @@ class RoomControllerTest {
 	}
 	
 	@Test
-	void test_ApplyDiscount_ReturnsCorrectPageAndListOfRooms_WhenCalledWithInvalidDiscount() throws Exception {
+	void test_ApplyDiscount_ReturnsCorrectPageAndListOfRooms_WhenCalledWithInvalidDiscountCode() throws Exception {
 		
 		Room room = new Room();
 		room.setId(1L);
@@ -162,7 +162,49 @@ class RoomControllerTest {
 		secondRoom.setCapacity(3);
 		
 		DiscountCode discountCode = new DiscountCode();
-		discountCode.setCode("AAAAAAAA");
+		discountCode.setCode("4543543543");
+		discountCode.setExpired(false);
+		discountCode.setDiscountPercentage(Double.valueOf(40));
+		
+		
+		List<Room> rooms = Arrays.asList(room, secondRoom);
+		
+		when(services.getEmptyRooms()).thenReturn(Arrays.asList(room, secondRoom));
+		
+		rooms.forEach(hotelRoom -> hotelRoom.setPrice(hotelRoom.getPrice() * ( (100 - discountCode.getDiscountPercentage())/100)));
+		
+		mockMvc.perform(post("/rooms").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+		.param("code", discountCode.getCode()))
+		.andExpect(status().isOk())
+		.andExpect(view().name("rooms"))
+		.andExpect(model().attribute("discountCodeString", " "))
+		.andExpect(model().attribute("rooms", hasSize(2)))
+		.andExpect(model().attribute("rooms", rooms));
+		
+		verify(services, times(1)).getEmptyRooms();
+		verify(discountCodeService, times(1)).verifyDiscountCode(discountCode.getCode());
+
+	}
+	
+	@Test
+	void test_ApplyDiscount_ReturnsCorrectPageAndListOfRooms_WhenCalledWithEmptyDiscountCode() throws Exception {
+		
+		Room room = new Room();
+		room.setId(1L);
+		room.setRoomNumber(50);
+		room.setOccupied(false);
+		room.setPrice(40.00);
+		room.setCapacity(3);;
+		
+		Room secondRoom = new Room();
+		secondRoom.setId(2L);
+		secondRoom.setRoomNumber(45);
+		secondRoom.setOccupied(false);
+		secondRoom.setPrice(40.00);
+		secondRoom.setCapacity(3);
+		
+		DiscountCode discountCode = new DiscountCode();
+		discountCode.setCode(" ");
 		discountCode.setExpired(false);
 		discountCode.setDiscountPercentage(Double.valueOf(40));
 		
