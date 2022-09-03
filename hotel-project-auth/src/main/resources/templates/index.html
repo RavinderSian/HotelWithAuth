@@ -15,7 +15,7 @@
 			<h2><a href= "/rooms">Rooms</a></h2>
 			<h2>About</h2>
 			<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}" class = "security-text"><a href= "/user/newuser">Register</a></h2>
-			<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}" class = "security-text"><a href= "/login">Login</a></h2>
+			<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}" class = "btn-login"><a href= "/login">Login</a></h2>
 		</nav>
 		
 		<article>
@@ -31,6 +31,20 @@
 		  	<img class = "responsive-image" src="https://cdn.dribbble.com/users/2859475/screenshots/7551660/media/a6aa2061e5693b544d883e842c479728.gif">
 		  </div>
 		</article>
-	
+		
+		<div class = "login-box hidden">
+		<form class = "login-form" name='loginForm' action="/performlogin" method='POST'>
+            <div>
+            <label>Username</label> 
+            <input type='text' name='username' value=''>
+            </div>
+            <div>
+            <label>Password</label> 
+            <input type='password' name='password' />
+            </div>
+            <input name="submit" type="submit" value="submit" />
+		</form>
+		</div>
+		<script src = "js/login.js"></script>
 	</body>
 </html>
