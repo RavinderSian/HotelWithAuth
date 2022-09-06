@@ -15,7 +15,7 @@
 			<h2><a href= "/rooms">Rooms</a></h2>
 			<h2>About</h2>
 			<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}" class = "security-text"><a href= "/user/newuser">Register</a></h2>
-			<h2 th:if="${#authentication.getPrincipal() == 'anonymousUser'}" class = "btn-login"><a href= "/login">Login</a></h2>
+			<h2 th:classappend="${#authentication.getPrincipal() == 'anonymousUser'} ? placeholder : hidden" class = "btn-login"><a href= "/login">Login</a></h2>
 		</nav>
 		
 		<article>
