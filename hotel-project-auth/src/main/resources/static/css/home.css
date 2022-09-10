@@ -86,3 +86,8 @@ article {
   	grid-auto-rows: 50px;
 }
 
+.login-error-text {
+	font-weight: bold;
+	text-align: center;
+	color: black;
+}
