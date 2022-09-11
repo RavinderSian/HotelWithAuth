@@ -2,10 +2,25 @@
 
 const btnLogin = document.querySelector('.btn-login');
 
+const body = document.body;
 
-btnLogin.addEventListener('click', function(e){
+const loginBox = document.querySelector('.login-box');
+
+btnLogin.addEventListener('click', (e) => {
 	e.preventDefault();
-	document.querySelector('.login-box').classList.toggle('hidden');
+	
+	loginBox.classList.toggle('hidden');
+	
+});
+
+document.addEventListener("click", (e) => {
+  //If the login button also triggers the hidden class to be added the box never appears
+  //So a second condition is needed to ensure that does not happen
+  const isClickInside = loginBox.contains(e.target) || btnLogin.contains(e.target);
+
+  if (!isClickInside) {
+	loginBox.classList.add('hidden');
+  }
 });
 
 // this is the id of the form
