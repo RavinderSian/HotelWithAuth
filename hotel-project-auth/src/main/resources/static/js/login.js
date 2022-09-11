@@ -30,7 +30,7 @@ $(".login-form").submit(function(e) {
 				document.forms["loginForm"].submit();
 			}
 			else {
-				document.querySelector('.login-error-text').classList.toggle('hidden');
+				document.querySelector('.login-error-text').classList.remove('hidden');
 			}
 		},
     });
